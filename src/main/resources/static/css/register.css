@@ -1,0 +1,41 @@
+body{
+    text-align: center;
+}
+
+.divstyle{
+    text-align: center;
+    margin-top: 50px;
+}
+
+.form-style{
+
+    margin:0 auto;
+    margin-top: 40px;
+    width: 300px;
+
+}
+
+
+.btn{
+    margin-top: 25px;
+    width: 300px;
+    height: 48px;
+}
+.form-control{
+    height: 48px;
+}
+.btn-iknow{
+    weight:20px;
+}
+.btn-iknow{
+   margin:0 auto;
+}
+/*css:
+给模态框设置overflow-y: hidden;即为取消掉页面滚动条的使用*/
+#HelpModal{margin-top: 95px;height: 300px;overflow-y: hidden;}
+/*添加滚动条*/
+.modal-body{overflow: auto;max-height:400px;}
+.remember:hover{
+    color:darkred!important;
+    text-decoration: underline!important;
+}

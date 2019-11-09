@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>博客首页</title>
+    <link type="text/css" rel="stylesheet" th:href="@{webjars/bootstrap/css/bootstrap.min.css}">
+    <link type="text/css" rel="stylesheet" th:href="@{/css/mydefine.css}">
+</head>
+<body>
+
+    <!--导航条-->
+    <nav class="navbar navbar-dark navbar-expand-sm navbar-light bg-dark  fixed-top">
+        <div class="container">
+
+        <a class="navbar-brand"  href="#">
+            <img th:src="@{/img/register.png}" width="30" height="30" class="d-inline-block align-top">
+            SoloBlog</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+             <ul class="navbar-nav mr-3">
+                 <li class="nav-item active de-mr-md">
+                     <a class="nav-link" href="#">首页</a>
+                 </li>
+                 <li class="nav-item de-mr-md">
+                     <a class="nav-link" href="#">分类</a>
+                 </li>
+                 <li class="nav-item de-mr-md">
+                     <a class="nav-link" href="#">标签</a>
+                 </li>
+                 <li class="nav-item de-mr-md">
+                     <a class="nav-link" href="#">归档</a>
+                 </li>
+                 <li class="nav-item de-mr-md">
+                     <a class="nav-link" href="#">关于我</a>
+                 </li>
+                 <li>
+                     <a href="/logout">退出登录</a>
+                 </li>
+             </ul>
+        </div>
+            <form class="form-inline">
+                <input class="form-control de-hg-md" type="search" placeholder="站内搜索" aria-label="Search">
+                <div class="input-group-append">
+                <button class="btn btn-outline-secondary de-hg-md" style="line-height: 20px" type="submit">⚪</button>
+                </div>
+            </form>
+
+    </div>
+    </nav>
+
+    <!--中间内容-->
+    <div>
+
+        <div shiro:hasPermission="payfree">
+            这是拥有免费支付权限的人才看的到的
+        </div>
+        <div shiro:hasPermission="deleteOrder">
+            这是拥有删除订单权限的人才看得到
+        </div>
+        <div>
+            all
+        </div>
+    </div>
+
+    <!--底部的footer-->
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="navbar-brand" href="#">Fixed bottom</a>
+    </nav>
+
+<script type="text/javascript" th:src="@{webjars/jquery/jquery.js}"></script>
+<script type="text/javascript" th:src="@{webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户注册</title>
+    <base th:href="${#request.getContextPath()}+'/'">
+</head>
+<body>
+
+    <div class="container divstyle">
+        <img th:src="@{/img/register.png}">
+        <h2>鸡儿小课堂</h2>
+        <form class="form-style" action="/register" method="post">
+            <div class="form-group">
+
+                <input type="email" class="form-control emailcheck" name="email" placeholder="邮箱地址">
+
+                <input type="text" class="form-control userName" name="userName" placeholder="用户名">
+
+                <input type="password" class="form-control passWord" name="passWord" placeholder="密码">
+            </div>
+            <div>
+            <label>
+                <input type="checkbox" class="checkbox"> <a class="text-muted remember" data-toggle="modal" data-target="#myModal">已同意本站协议</a>
+            </label>
+            </div>
+            <div>
+            <button class="btn btn-default btn-style disabled regsiter_btn" type="submit">注册</button>
+            </div>
+        </form>
+        <p class="mt-5 mb-3 text-muted">© 2017-2019</p>
+    </div>
+    <!--模态框modal（用户协议）-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">注册须知</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="lead">本博客只做学习跟交流使用，禁止任何商业用途，有任何问题可以
+                        联系作者本人QQ：993643197
+                        <br>
+                        《我是用户协议》-----
+                        你在你的城市
+                        我有我的影子
+                        我想去你的城市
+                        让你沾上我的影子
+                        有些似曾相识
+                        仿佛多年故知
+                        你在爱情的伤里
+                        欲言又止
+                        如果能回到五月十四
+                        出生的那天开始
+                        做一个吵着要糖的孩子
+                        幸福不会姗姗来迟
+                        如果能重回五月十四
+                        把你带入我的故事
+                        陪你想心事
+                        不担心会流失
+                        关于思念的那些句子
+                        你在你的城市
+                        我有我的影子
+                        我想去你的城市
+                        让你沾上我的影子
+                        有些似曾相识
+                        仿佛多年故知
+                        你在爱情的伤里
+                        欲言又止
+                        如果能回到七月二十
+                        出生的那天开始
+                        做一个吵着要糖的孩子
+                        幸福不会姗姗来迟
+                        如果能重回七月二十
+                        把你带入我的故事
+                        陪你想心事
+                        不担心会流失
+                        关于思念的那些句子
+                        你在你的城市
+                        我有我的影子
+                        我想去你的城市
+                        让你沾上我的影子
+                        有些似曾相识
+                        仿佛多年故知
+                        你在爱情的伤里
+                        欲言又止
+                        如果能回到七月二十
+                        出生的那天开始
+                        做一个吵着要糖的孩子
+                        幸福不会姗姗来迟
+                        如果能重回七月二十
+                        把你带入我的故事
+                        陪你想心事
+                        不担心会流失
+                        关于思念的那些句子
+
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger btn-iknow" data-dismiss="modal" style="">知道了</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" th:src="@{webjars/jquery/jquery.js}"></script>
+
+    <script type="text/javascript" th:src="@{webjars/bootstrap/js/bootstrap.min.js}"></script>
+   <link type="text/css" rel="stylesheet" th:href="@{webjars/bootstrap/css/bootstrap.min.css}">
+    <link type="text/css" rel="stylesheet" th:href="@{/css/register.css}" >
+    <script>
+
+        var register_btn_status = false;
+
+
+        $(".emailcheck").blur(function () {
+
+            var email = $('.emailcheck').val();
+
+            $.ajax({
+                url:"/emailcheck",
+                data:{email:email},
+                type:"get",
+                success:function(result){
+                    if(result){
+                        alert(result);
+                        alert("该邮箱已被注册");
+                        $('.btn-style').addClass('disabled').addClass("btn-default").removeClass("btn-primary");
+                        register_btn_status =false;
+                    }else{
+                        register_btn_status = true;
+                    }
+                }
+            })
+        })
+        $('.checkbox').change(function(){
+            var check = $(this).prop('checked');
+            if(check){
+                $('.btn-style').removeClass('disabled').addClass("btn-primary").removeClass("btn-default");
+
+            }else{
+                $('.btn-style').addClass('disabled').addClass("btn-default").removeClass("btn-primary");
+
+            }
+        })
+        $('.regsiter_btn').click(function (){
+            var email = $('.emailcheck').val();
+            var userName = $('.userName').val();
+            var passWord = $('.passWord').val();
+
+            var check_final = $('.checkbox').prop("checked");
+            if(email==""&&userName==""&&passWord=="")
+            {
+                alert("扑街仔，请确认信息输入是否正确");
+                return false;
+            }
+            if(!register_btn_status)
+            {
+                return false;
+            }
+            if(!check_final)
+            {
+                return false;
+            }
+
+        })
+    </script>
+</body>
+
+</html>
