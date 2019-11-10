@@ -30,4 +30,8 @@
  LEFT JOIN permission on permission.pid = role_permission.pid where user.email=#{email}
     </select>
 
+    <!--public boolean addUserRole(Integer userId,Integer rid);-->
+    <insert id="addUserRole" parameterType="Integer">
+        INSERT user_role(userId,rid) value(#{userId},#{rid});
+    </insert>
 </mapper>

@@ -8,13 +8,16 @@ public class MD5Utils {
 
     /**
      * @param crdentials 加密原，也就是原密码值
-     * @param salt  盐值，这里取邮箱
+     * @param salt       盐值，这里取邮箱
      * @return
      */
-    public static String encript_password(String crdentials,String salt){
+    public static String encript_password(String crdentials, String salt) {
 
-        Object encriptPassword = new SimpleHash(hashAlgorithmName,crdentials,salt,hashIterations);
+        Object encriptPassword = new SimpleHash(hashAlgorithmName, crdentials, salt, hashIterations);
         return String.valueOf(encriptPassword);
     }
-
+    //这个是生成数据库数据的方式。直接运行main就OK
+    public static void main() {
+        System.out.println(encript_password("123456", "993643197@qq.com"));
+    }
 }

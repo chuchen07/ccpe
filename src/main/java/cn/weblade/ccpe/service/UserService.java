@@ -17,8 +17,13 @@ public class UserService {
     UserMapper userMapper;
 
     public boolean addUser(User user) throws MessagingException {
-        MailUtils.sendMail(user.getEmail(),user.getUserCode());
-        return userMapper.addUser(user);
+        String email = user.getEmail();
+        MailUtils.sendMail(email,user.getUserCode());
+        boolean addUser_result = userMapper.addUser(user);
+        List<User> users = userMapper.findUserByEmail(email);
+        Integer userId = users.get(0).getUserId();
+        boolean addUserRole_result = userMapper.addUserRole(userId,1);
+        return addUser_result && addUserRole_result;
     }
 
 
@@ -51,5 +56,6 @@ public class UserService {
         Set<String> permissions = userMapper.findPermissionByEmail(email);
         return permissions;
     }
+
 
 }

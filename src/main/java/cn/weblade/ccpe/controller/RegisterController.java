@@ -44,6 +44,7 @@ public class RegisterController {
             model.addAttribute("msg","注册成功，快到邮箱激活吧");
 
         } catch (MessagingException e) {
+
             model.addAttribute("msg","注册失败"+e);
         }
 

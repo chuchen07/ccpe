@@ -47,11 +47,12 @@ public class UserRealm extends AuthorizingRealm {
         //从数据库里面获取用户信息，例子提示说这里可以做缓存,如果不做，shiro有自己的缓存机制，两分钟内不会重复验证
         List<User> user = userService.findUserByEmail(email);
         //如果用户数量为0,即用户不存在（这里应该有更好的机制，但是数据库方面没有做限制，所以不敢保证邮箱的唯一性）
-       if(user.size()==0 && user.get(0).getUserState()== "0"){
-          return (AuthenticationInfo) new UnknownAccountException();
-         //   return null;//这里shiro会抛出UnknowAccoutException
+        String state = user.get(0).getUserState();
+        int num = user.size();
+       if(num==0 || state.equals("0")){
+           return null;
            //TODO：bug：无法抛出unknowAccoutExceptioon
-     }
+         }
 
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user.get(0).getEmail(),user.get(0).getPassWord(),getName());
 
