@@ -1,18 +1,24 @@
 package cn.weblade.ccpe.controller;
 
+import cn.weblade.ccpe.entity.Page;
+import cn.weblade.ccpe.entity.User;
+import cn.weblade.ccpe.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class UserController {
+    @Autowired
+    UserService userService;
+
     @PostMapping("/login")
     public String login(String email, String passWord, Model model){
         /*
@@ -40,12 +46,54 @@ public class UserController {
             model.addAttribute("msg","其他登录错误");
             return "login.html";
         }
-
-        return "index.html";
+        if(subject.hasRole("管理员")){
+            return "admin_interface.html";
+        }else if(subject.hasRole("普通用户")){
+            return "index.html";
+        }
+        return "unauthorize_Page.html";
     }
     //TODO
     @GetMapping("/index")
     public String index(){
         return "index.html";
     }
+
+
+    /**
+     * @param currentPage 当前页码
+     * @param pageAmount 页面数量
+     * @return  返回Page对象
+     */
+    @ResponseBody
+    @GetMapping("/data")
+    public Page<User> getPageUserMessages(@RequestParam("currentPage")Integer currentPage,
+                                          @RequestParam("pageAmount")Integer pageAmount)
+    {
+       Page<User>page =  userService.getPageUserMessages(pageAmount,currentPage);
+       if(page==null){
+           Page<User> erropage = new Page<User>();
+           erropage.setMsg("请求参数无效");
+           return erropage;
+       }
+       page.setMsg("请求成功");
+       return page;
+    }
+
+    /**
+     * @param email 邮箱
+     * @return   如果删除成功返回true；否则返回false；
+     */
+    @ResponseBody
+    @GetMapping("/deleteUser")
+    public boolean deleteUser(@RequestParam("email")String email){
+       return userService.deleteUser(email);
+    }
+
+    @ResponseBody
+    @PostMapping("/updateUser")
+    public boolean updateUser(User user){
+        return userService.updateUser(user);
+    }
+
 }

@@ -17,7 +17,10 @@ public class MD5Utils {
         return String.valueOf(encriptPassword);
     }
     //这个是生成数据库数据的方式。直接运行main就OK
-    public static void main() {
-        System.out.println(encript_password("123456", "993643197@qq.com"));
+
+    public static void main(String[] args) {
+        System.out.println(encript_password("123456","874747213@qq.com"));
     }
+
+
 }

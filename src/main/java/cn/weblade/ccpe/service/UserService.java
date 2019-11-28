@@ -1,6 +1,7 @@
 package cn.weblade.ccpe.service;
 
 import cn.weblade.ccpe.dao.UserMapper;
+import cn.weblade.ccpe.entity.Page;
 import cn.weblade.ccpe.entity.User;
 import cn.weblade.ccpe.utils.MailUtils;
 import org.springframework.stereotype.Service;
@@ -57,5 +58,40 @@ public class UserService {
         return permissions;
     }
 
+    public Page<User> getPageUserMessages(Integer pageAmount,Integer currentPage){
+        Page<User> page = new Page<User>();
+        Integer startLineNum = page.getStartLineNum(currentPage,pageAmount);
+        try {
+            List<User> users = userMapper.getPartyUsers(startLineNum, pageAmount);
+            int totalCount = userMapper.getUsersAmount();
+            page.initPage(users,currentPage,pageAmount,totalCount);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+
+        return page;
+
+    }
+
+
+    public boolean deleteUser(String email){
+        List<User> user = userMapper.findUserByEmail(email);
+        System.out.println(user.size());
+        if(user.size()==0){
+            return false;
+        }else{
+           Integer id  = user.get(0).getUserId();
+           userMapper.deleteUser(email);
+           userMapper.deleteUserRole(id);
+           return true;
+        }
+
+    }
+
+    public boolean updateUser(User user){
+        return userMapper.updateUser(user);
+    }
 
 }

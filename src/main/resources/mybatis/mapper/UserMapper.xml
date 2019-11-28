@@ -34,4 +34,31 @@
     <insert id="addUserRole" parameterType="Integer">
         INSERT user_role(userId,rid) value(#{userId},#{rid});
     </insert>
+
+
+    <!-- public List<User> getPartyUsers (Integer startLineNum,Integer pageAmount);-->
+    <select id="getPartyUsers" resultType="cn.weblade.ccpe.entity.User" parameterType="Integer">
+        SELECT * FROM `user` LIMIT #{startLineNum},#{pageAmount}
+    </select>
+
+    <!--public Integer getUsersAmount();-->
+    <select id="getUsersAmount" resultType="Integer">
+        SELECT count(*) FROM user
+    </select>
+
+    <!--public boolean deleteUser(@Param("email")String email);-->
+    <delete id="deleteUser" parameterType="String">
+        DELETE FROM `user` WHERE email = #{email};
+    </delete>
+
+    <!--  public boolean deleteUserRole(@Param("userId")Integer userId);-->
+    <delete id="deleteUserRole" parameterType="Integer">
+        DELETE FROM user_role WHERE userId = #{userId};
+    </delete>
+    
+    <!-- public boolean updateUser(User user);-->
+    <update id="updateUser" parameterType="cn.weblade.ccpe.entity.User">
+        UPDATE `user` SET userName=#{userName},userState=#{userState} WHERE email=#{email};
+    </update>
+    
 </mapper>

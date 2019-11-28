@@ -32,6 +32,9 @@ public class ShiroConfig {
          *  role:该资源必须得到角色权限才可以访问
          */
         Map<String,String> filterMap = new LinkedHashMap<String,String>();
+        filterMap.put("/index.html","anon");
+
+        filterMap.put("/index","anon");
         filterMap.put("/emailcheck","anon");
         filterMap.put("/login","anon");
        filterMap.put("/registerPage","anon");
@@ -42,7 +45,7 @@ public class ShiroConfig {
         filterMap.put("/*","authc");
 
        //设置未授权界面
-      shiroFilterFactoryBean.setUnauthorizedUrl("/");
+      shiroFilterFactoryBean.setUnauthorizedUrl("/unauthorize_Page");
        shiroFilterFactoryBean.setLoginUrl("/loginPage");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
 

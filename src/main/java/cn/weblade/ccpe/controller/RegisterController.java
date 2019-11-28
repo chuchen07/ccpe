@@ -80,4 +80,7 @@ public class RegisterController {
         return  "temporary_page.html";
     }
 
+
+    @GetMapping("/unauthorize_Page")
+    public String ununauthorize_Page(){return "unauthorize_Page.html";}
 }
