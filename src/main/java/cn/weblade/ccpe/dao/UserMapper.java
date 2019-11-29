@@ -42,4 +42,6 @@ public interface UserMapper {
     //更新用户信息
     public boolean updateUser(User user);
 
+    //获取权限列表
+
 }
