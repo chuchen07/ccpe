@@ -70,36 +70,77 @@ function ajaxGetData(currentPage) {
 
             var users = result.list;
             $.each(users,function(index,item){
-                var userId =$("<td></td>").append(item.userId);
-             var userName = $("<td></td>").append(item.userName);
-             var email = $("<td></td>").append(item.email);
-            var userCode = $("<td></td>").append(item.userCode);
-
+                var userId =$("<td></td>").append("<input type='text' disabled='ture' value="+item.userId+">");
+                var userName = $("<td></td>").append("<input type='text'  value="+item.userName+">");
+                var email = $("<td></td>").append("<input type='text' disabled='ture' value="+item.email+">");
+                var userCode = $("<td></td>").append("<input type='text'  value="+item.userCode+">");
+                var userState = $("<td></td>").append("<input type='text'  value="+item.userState+">");
                 var editBtn	= $("<button></button>").addClass("btn btn-primary btn-sm")
-                    .append($("<span></span>").addClass("glyphicon glyphicon-edit")).append("修改");
-                var deleBtn=$("<button onclick='javascript:this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);'></button>").addClass("btn btn-danger ")
+                    .append($("<span></span>").addClass("glyphicon glyphicon-edit")).append("编辑");
+                var deleBtn=$("<button ></button>").addClass("btn btn-danger ")
                     .append($("<span></span>").addClass("glyphicon glyphicon-trash")).append("删除");
+
+
+                // onclick='javascript:this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);'
+
+           //删除按钮
+                deleBtn.attr("email",item.email);
+                deleBtn.click(function () {
+
+                     $.ajax({
+
+                        url:"/deleteUser?time="+new Date().getTime(),//解决数据缓存
+                         data:"email="+deleBtn.attr("email"),
+                          type:"get",
+                        success:function(result){
+                        if(result==true){
+                              alert("成功：该用户已删除");
+                             ajaxGetData();
+                            }else{
+                               alert("失败：删除用户失败");
+                        }
+                     }
+                  });
+                });
+
+            //修改按钮
+                editBtn.click(function () {
+                    // var edit_userName = $(this).parent().parent().children().eq(1).children().val();
+                    // var edit_userCode = $(this).parent().parent().children().eq(3).children().val();
+                    // var edit_userState = $(this).parent().parent().children().eq(4).children().val();
+                    editBtn.attr("edit_userName",item.userName);
+                    editBtn.attr("edit_userCode",item.userCode);
+                    editBtn.attr("edit_userState",item.userState);
+                    alert(editBtn.attr("edit_userName"));
+                    $.ajax({
+                        url: "/updateUser?" + new Date().getTime(),
+                        type: "post",
+                        data:
+                            "userName="+editBtn.attr("edit_userName")+
+                            "&userCode="+editBtn.attr("edit_userCode")+
+                            "&userState="+editBtn.attr("edit_userState"),
+                        success: function (result) {
+                            alert(result);
+                        }
+
+
+                    });
+
+                });
                 var btn = $("<td></td>").append(editBtn).append(" ").append(deleBtn)
-
-
-                // function deleteRow(r){
-                //     var i=r.parentNode.parentNode.rowIndex;
-                //     document.getElementById('users_table').deleteRow(i);
-                //
-                // }
-
 
                 $("<tr></tr>").append(userId)
                     .append(userName)
                     .append(email)
                     .append(userCode)
+                    .append(userState)
                     .append(btn)
                     .appendTo("#users_table tbody");
             })
 
-        }
-    })
-}
+
+    }
+})
 //绑定a点击分页
 var oLi= document.getElementsByTagName("a");
 for (var i=0;i<oLi.length;i++){
@@ -124,5 +165,6 @@ function goTo() {
             }
         }//读取方法
     }
-}
+}}
+
 

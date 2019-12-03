@@ -111,13 +111,13 @@ table{
     table-layout: fixed;
 }
 th {
-    width: 150px;
+    width: 120px;
     height: 30px;
     padding-left: 50px;
 
 }
 td{
-    width: 150px;
+    width: 120px;
     height: 30px;
     padding-left: 50px;
     white-space:nowrap;
