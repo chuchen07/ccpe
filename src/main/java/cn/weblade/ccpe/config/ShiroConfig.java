@@ -32,9 +32,12 @@ public class ShiroConfig {
          *  role:该资源必须得到角色权限才可以访问
          */
         Map<String,String> filterMap = new LinkedHashMap<String,String>();
+
         filterMap.put("/index.html","anon");
         //TODO
-        // 待删
+        // 待删deleteUser
+        filterMap.put("/updateUser","anon");
+       // filterMap.put("/deleteUser","anon");
         filterMap.put("/answer","anon");
         filterMap.put("/course","anon");
         filterMap.put("/main","anon");
