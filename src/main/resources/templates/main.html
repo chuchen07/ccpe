@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="js/jquery.js"></script>
+    <!-- bootstrap插件 -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/jquery.min.js"></script>
+
+    <!-- 轮播图插件 -->
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <!--CSS RESET-->
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- 瀑布流插件 -->
+
+    <title>首页</title>
+</head>
+
+<body>
+    <div class="container">
+        <!-- 导航条 -->
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">首页 <span class="sr-only">(current)</span></a></li>
+                        <li><a href="course.html">课程</a></li>
+                        <li><a href="answer.html">答题</a></li>
+
+                    </ul>
+                    <form class="navbar-form navbar-left">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="请输入搜索的课程名称">
+                        </div>
+                        <button type="submit" class="btn btn-default glyphicon glyphicon-search">搜索</button>
+                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">登录</a></li>
+                        <li><a href="#">注册</a></li>
+                        <li><a href="#" class="glyphicon glyphicon-user">个人中心</a></li>
+
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+
+        <div>
+            <div class="row">
+                <header class="col-md-3">
+                    <div class="LOGO">
+                        <div class="logo">
+                            <a href="#">
+                                <img src="img/logo.png" alt="">
+                            </a>
+                            <h4 href="#">飞鸡小课堂</h4>
+                        </div>
+                    </div>
+
+                    <div class="nav">
+                        <ul>
+                            <li class="current">
+                                <a href="" class="glyphicon glyphicon-th-list">课程分类</a>
+                            </li>
+                            <li>
+                                <a href="" class="glyphicon glyphicon-eye-open">初级课程</a>
+                            </li>
+                            <li>
+                                <a href="" class="glyphicon glyphicon-eye-open">进阶课程</a>
+                            </li>
+                            <li>
+                                <a href="" class="glyphicon glyphicon-eye-open">高级课程</a>
+                            </li>
+                            <li>
+                                <a href="" class="glyphicon glyphicon-yen">会员课程</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </header>
+
+                <article class="col-md-9">
+                    <!-- 轮播图 -->
+                    <div class="htmleaf-container">
+                        <p id="loading">loading...</p>
+                        <div id="img">
+                            <div class="lighten">
+                                <img src="img/lighten1.jpg" alt="" />
+                                <img src="img/lighten2.jpg" alt="" />
+                                <img src="img/lighten3.jpg" alt="" />
+                                <img src="img/lighten4.jpg" alt="" />
+                            </div>
+                            <div class="normal">
+                                <img src="img/normal1.jpg" alt="" />
+                                <img src="img/normal2.jpg" alt="" />
+                                <img src="img/normal3.jpg" alt="" />
+                                <img src="img/normal4.jpg" alt="" />
+                                <div class="carousel-caption">
+                                    <h3>视频名称</h3>
+                                    <p>简介</p>
+                                </div>
+                            </div>
+                            <nav>
+                                <ul>
+                                    <li class="pre"></li>
+                                    <li class="next"></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <!-- 热门推荐部分 -->
+        <div>
+            <button href="" class="btn2">热门推荐视频</button>
+        </div>
+
+        <section id="gallery-wrapper">
+            <article class="white-panel">
+                <img src="img/1.jpg" class="thumb">
+                <h1><a href="#">Title 1</a></h1>
+                <p>Description 1</p>
+            </article>
+            <article class="white-panel">
+                <img src="img/2.jpg" class="thumb">
+                <h1><a href="#">Title 2</a></h1>
+                <p>Description 2</p>
+            </article>
+            <article class="white-panel">
+                <img src="img/3.jpg" class="thumb">
+                <h1><a href="#">Title 3</a></h1>
+                <p>Description 3</p>
+            </article>
+            <article class="white-panel">
+                <img src="img/4.jpg" class="thumb">
+                <h1><a href="#">Title 4</a></h1>
+                <p>Description 4</p>
+            </article>
+            <article class="white-panel">
+                <img src="img/5.jpg" class="thumb">
+                <h1><a href="#">Title 5</a></h1>
+                <p>Description 5</p>
+            </article>
+            <article class="white-panel">
+                <img src="img/6.jpg" class="thumb">
+                <h1><a href="#">Title 6</a></h1>
+                <p>Description 6</p>
+            </article>
+            <article class="white-panel">
+                <img src="img/7.jpg" class="thumb">
+                <h1><a href="#">Title 7</a></h1>
+                <p>Description 7</p>
+            </article>
+            <article class="white-panel">
+                <img src="img/8.jpg" class="thumb">
+                <h1><a href="#">Title 8</a></h1>
+                <p>Description 8</p>
+            </article>
+            <article class="white-panel">
+                <img src="img/9.jpg" class="thumb">
+                <h1><a href="#">Title 9</a></h1>
+                <p>Description 9</p>
+            </article>
+            <article class="white-panel">
+                <img src="img/10.jpg" class="thumb">
+                <h1><a href="#">Title 10</a></h1>
+                <p>Description 10</p>
+            </article>
+            <article class="white-panel">
+                <img src="img/11.jpg" class="thumb">
+                <h1><a href="#">Title 11</a></h1>
+                <p>Description 11</p>
+            </article>
+            <article class="white-panel">
+                <img src="img/12.jpg" class="thumb">
+                <h1><a href="#">Title 12</a></h1>
+                <p>Description 12</p>
+            </article>
+            <article class="white-panel">
+                <img src="img/13.jpg" class="thumb">
+                <h1><a href="#">Title 13</a></h1>
+                <p>Description 13</p>
+            </article>
+            <article class="white-panel">
+                <img src="img/14.jpg" class="thumb">
+                <h1><a href="#">Title 14</a></h1>
+                <p>Description 14</p>
+            </article>
+            <article class="white-panel">
+                <img src="img/15.jpg" class="thumb">
+                <h1><a href="#">Title 15</a></h1>
+                <p>Description 15</p>
+            </article>
+        </section>
+
+    </div>
+
+
+    <!-- //瀑布流插件 -->
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <script src="js/pinterest_grid.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

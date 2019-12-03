@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="js/jquery.js"></script>
+    <!-- bootstrap插件 -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- 瀑布流插件 -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/default.css">
+    <link rel="stylesheet" href="css/manage.css">
+
+    <title>Document</title>
+</head>
+
+<body>
+<div class="container">
+    <!-- 一个view代表一个管理界面 -->
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="LOGO">
+                <div class="logo">
+                    <a href="#">
+                        <img src="img/logo.png" alt="">
+                    </a>
+                    <h5 href="#">飞鸡小课堂</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="bar">
+                <ul class="navbar">
+                    <!-- 一个type代表一个管理选择器 -->
+                    <li class="type">用户管理</li>
+                    <li class="type">视频管理</li>
+                    <li class="type">题库管理</li>
+                    <li class="glyphicon glyphicon-user">管理员</li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="tab">
+        <!-- 用户管理模块 -->
+        <div class="view" style="display: block;">
+            <div class="row">
+                <div class="col-md-3">
+
+                    <div class="nav">
+                        <ul>
+                            <li class="current glyphicon glyphicon-user">用户管理</li>
+                            <li class="glyphicon glyphicon-education">权限管理</li>
+
+                        </ul>
+                    </div>
+                    <div class="ad">
+                        广告栏招租中
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="item" style="display: block;">
+                        <div id="word" align="center">
+                            <h1>用户信息管理
+                                <h1>
+                        </div>
+
+                        <table class="table table-striped" id="users_table">
+
+                            <thead>
+                            <tr>
+                                <th>用户id</th>
+                                <th>用户名</th>
+                                <th>用户邮箱</th>
+                                <th>激活码</th>
+                                <th>修改|删除</th>
+                            </tr>
+                            </thead>
+                            <tbody id="nr">
+<!--                            <tr>-->
+<!--                                <th>userId</th>-->
+<!--                                <th>userName</th>-->
+<!--                                <th>email</th>-->
+<!--                                <th>actiCode</th>-->
+<!--                                <th>-->
+<!--                                    <button class="caozuo glyphicon glyphicon-trash"></button>-->
+<!--                                    <button class="caozuo glyphicon glyphicon-edit"></button>-->
+<!--                                </th>-->
+<!--                            </tr>-->
+                            </tbody>
+                        </table>
+
+                        <div style="width:30%; margin:0px auto">
+                            <ul class="pagination" id="pagelist">
+                                <li><a>&laquo;</a></li>
+                                <li class="active"><a>1</a></li>
+                                <li class="disabled"><a>2</a></li>
+                                <li><a>3</a></li>
+                                <li><a>4</a></li>
+                                <li><a>5</a></li>
+                                <li><a>&raquo;</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="item">
+                        权限管理模块
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 视频管理模块 -->
+        <div class="view">
+
+            <div class="row">
+                <div class="col-md-3">
+
+                    <div class="nav">
+                        <ul>
+                            <li class="current2 glyphicon glyphicon-user">视频管理</li>
+                            <li class="glyphicon glyphicon-education">上传视频</li>
+
+                        </ul>
+                    </div>
+                    <div class="ad">
+                        广告栏招租中
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="item2" style="display: block;">
+                        <div id="word" align="center">
+                            <h1>视频管理
+                                <h1>
+                        </div>
+
+                    </div>
+                    <div class="item2">
+                        <div id="word" align="center">
+                            <h1>上传视频
+                                <h1>
+                        </div>
+                        <div class="uploadVideo">
+                            <div>
+                                视频名称 ： <input type="text" name="name" />
+                            </div>
+                            <div>
+                                视频类型 ：<input class="browsers" list="browsers">
+                                <datalist id="browsers">
+                                    <option value="初级">
+                                    <option value="进阶">
+                                    <option value="高级">
+                                    <option value="会员">
+                                </datalist>
+                            </div>
+                            <div>
+                                <input type="file">
+                            </div>
+                            <div>
+                                <textarea name="" id="" cols="30" rows="5">视频详情介绍</textarea>
+                            </div>
+                            <button>确认上传</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 题库管理模块 -->
+        <div class="view">
+
+            <div class="row">
+                <div class="col-md-3">
+
+                    <div class="nav">
+                        <ul>
+                            <li class="current3 glyphicon glyphicon-user">题库管理</li>
+                            <li class="glyphicon glyphicon-education">上传题库</li>
+
+                        </ul>
+                    </div>
+                    <div class="ad">
+                        广告栏招租中
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="item3" style="display: block;">
+                        <div id="word" align="center">
+                            <h1>题库管理
+                                <h1>
+                        </div>
+
+                    </div>
+                    <div class="item3">
+                        上传题库模块
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+</div>
+
+
+<!-- //瀑布流插件 -->
+<script src="js/jquery-1.11.0.min.js"></script>
+<script src="js/pinterest_grid.js"></script>
+<script src="js/manage.js"></script>
+<script src="js/myAjax.js"></script>
+</body>
+
+</html>

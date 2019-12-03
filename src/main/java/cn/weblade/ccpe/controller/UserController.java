@@ -43,7 +43,7 @@ public class UserController {
             model.addAttribute("msg","用户密码错误");
             return "login.html";
         }catch (AuthenticationException e){
-            model.addAttribute("msg","其他登录错误");
+            model.addAttribute("msg","用户名不存在或未激活");
             return "login.html";
         }
         if(subject.hasRole("管理员")){
@@ -95,5 +95,31 @@ public class UserController {
     public boolean updateUser(User user){
         return userService.updateUser(user);
     }
+
+    @GetMapping("/test")
+    public String test(){
+        return "temporary_page.html";
+    }
+
+    @GetMapping("/manage")
+    public String manage(){
+        return "manage.html";
+    }
+
+    @GetMapping("/main")
+    public String main(){
+        return "main.html";
+    }
+
+    @GetMapping("/course")
+    public String course(){
+        return "course.html";
+    }
+
+    @GetMapping("/answer")
+    public String answer(){
+        return "answer.html";
+    }
+
 
 }

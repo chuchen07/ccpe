@@ -33,6 +33,16 @@ public class ShiroConfig {
          */
         Map<String,String> filterMap = new LinkedHashMap<String,String>();
         filterMap.put("/index.html","anon");
+<<<<<<< HEAD
+=======
+        //TODO
+        // 待删
+        filterMap.put("/answer","anon");
+        filterMap.put("/course","anon");
+        filterMap.put("/main","anon");
+        filterMap.put("/manage","anon");
+        filterMap.put("/test","anon");
+>>>>>>> 67acce2abe6dc228efce8cab35c5915ca60b186e
         filterMap.put("/data","anon");
         filterMap.put("/index","anon");
         filterMap.put("/emailcheck","anon");
