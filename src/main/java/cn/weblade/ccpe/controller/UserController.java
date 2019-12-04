@@ -47,9 +47,9 @@ public class UserController {
             return "login.html";
         }
         if(subject.hasRole("管理员")){
-            return "admin_interface.html";
+            return "manage.html";
         }else if(subject.hasRole("普通用户")){
-            return "index.html";
+            return "main.html";
         }
         return "unauthorize_Page.html";
     }
@@ -96,30 +96,7 @@ public class UserController {
         return userService.updateUser(user);
     }
 
-    @GetMapping("/test")
-    public String test(){
-        return "temporary_page.html";
-    }
 
-    @GetMapping("/manage")
-    public String manage(){
-        return "manage.html";
-    }
-
-    @GetMapping("/main")
-    public String main(){
-        return "main.html";
-    }
-
-    @GetMapping("/course")
-    public String course(){
-        return "course.html";
-    }
-
-    @GetMapping("/answer")
-    public String answer(){
-        return "answer.html";
-    }
 
 
 }

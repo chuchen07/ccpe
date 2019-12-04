@@ -1,9 +1,10 @@
 body{
     text-align: center;
-
+    background: rgba(154, 226, 226, 0.959);
 }
 
 .divstyle{
+
     text-align: center;
     margin-top: 50px;
 }

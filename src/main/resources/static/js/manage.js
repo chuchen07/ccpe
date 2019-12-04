@@ -103,7 +103,7 @@ function ajaxGetData(currentPage) {
                   });
                 });
 
-            //修改按钮
+            //编辑按钮
                 editBtn.click(function () {
                     // var edit_userName = $(this).parent().parent().children().eq(1).children().val();
                     // var edit_userCode = $(this).parent().parent().children().eq(3).children().val();
