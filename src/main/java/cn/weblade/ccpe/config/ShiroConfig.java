@@ -39,6 +39,7 @@ public class ShiroConfig {
         // 待删deleteUser
         filterMap.put("/updateUser","anon");
        // filterMap.put("/deleteUser","anon");
+        filterMap.put("/exam","anon");
         filterMap.put("/answer","anon");
         filterMap.put("/course","anon");
         filterMap.put("/main","anon");

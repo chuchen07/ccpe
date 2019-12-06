@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="js/jquery.js"></script>
+    <!-- bootstrap插件 -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/jquery.min.js"></script>
+    <!-- 瀑布流插件 -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/default.css">
+    <link rel="stylesheet" href="css/exam.css">
+
+    <title>答题界面</title>
+</head>
+
+<body>
+<div class="container">
+    <div class="title">
+    <div class="text">开始答题啦</div>
+    </div>
+<!--   试题-->
+    <div>
+        <form action=""  method="post">
+            <fieldset>
+                <h2>青少年生理健康题</h2>
+
+                <!--part1-->
+                <fieldset>
+                    <h3>单选题（5分/题）</h3>
+                    <div id="">
+                        <fieldset class="question">
+                            <p >问题</p>
+                            <label><input type="radio" name="answer1" value="6"/>选项1</label>
+                            <br />
+                            <label><input type="radio" name="answer1"  value="0"/>选项2</label>
+                            <br />
+                            <label><input type="radio" name="answer1" value="0"/>选项3</label>
+                        </fieldset>
+
+
+                        <fieldset class="question">
+                            <p >Qeustion 9:夸父出自 </p>
+                            <label id="9"><input type="radio" name="answer9"  value="6"/>《山海经》</label>
+                            <br />
+                            <label><input type="radio" name="answer9"  value="0"/>《搜神记》</label>
+                            <br/>
+                            <label><input type="radio" name="answer9"  value="0"/>《封神演义》</label>
+                        </fieldset>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <h3>多选题（每题10分， 错选不得分）</h3>
+                    <div id="grey">
+                        <fieldset class="question">
+                            <p >题目1</p>
+                            <input type="checkbox" name="answer10" value="5" /><span id="10">选项1</span>
+                            <br />
+                            <input type="checkbox" name="answer10" value="5" /><span id="10">选项2</span>
+                            <br />
+                            <input type="checkbox" name="answer10" value="5" /><span id="10">选项3</span>
+                            <br />
+                            <input type="checkbox" name="answer10" value="-1" /><span>选项4</span>
+                        </fieldset>
+                        <fieldset class="question">
+                            <p >Qeustion 11: 关于李白正确的描述</p>
+                            <input type="checkbox" name="answer11" value="7" /><span id="11">被誉为“诗仙”</span>
+                            <br />
+                            <input type="checkbox" name="answer11" value="8" /><span id="11">著有《蜀道难》</span>
+                            <br />
+                            <input type="checkbox" name="answer11" value="-1" /><span>号易安居士”</span>
+                            <br />
+                            <input type="checkbox" name="answer11" value="-1" /><span>婉约派诗人</span>
+                        </fieldset>
+
+                    </div>
+                </fieldset>
+                <button type="button" οnclick="coreCount()">查看成绩</button>
+                <button type="button" οnclick="showWhichWrong()">查看错题</button>
+            </fieldset>
+
+        </form>
+    </div>
+</div>
+</body>
+<!-- //瀑布流插件 -->
+<script src="js/jquery-1.11.0.min.js"></script>
+<script src="js/pinterest_grid.js"></script>
+</body>
+
+</html>
