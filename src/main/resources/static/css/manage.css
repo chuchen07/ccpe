@@ -77,11 +77,36 @@ li {
 
 .ad {
     height: 300px;
-    background-color: #fff;
-    text-align: center;
+    background-color: #ffece7;
     line-height: 300px;
     color: #000;
 }
+
+@keyframes move {
+    /* 开始状态 */
+    0% {
+        transform: translateX(0px);
+    }
+
+    /* 结束状态 */
+    100% {
+        transform: translateX(200px);
+    }
+}
+#ad_text{
+    position: relative;
+    transition: all 2s;
+    /* 让背面盒子保留3d空间 */
+    transform-style: preserve-3d;
+    animation-name: move;
+    animation-duration: 2s;
+    /* 循环播放 */
+    animation-iteration-count: infinite;
+    /* 反向播放 */
+    animation-direction: alternate;
+    /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+}
+
 
 
 /* 导航条 */

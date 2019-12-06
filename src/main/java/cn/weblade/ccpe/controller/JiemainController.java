@@ -28,4 +28,9 @@ public class JiemainController {
     public String answer(){
         return "answer.html";
     }
+
+    @GetMapping("/exam")
+    public String exam(){
+        return "exam.html";
+    }
 }

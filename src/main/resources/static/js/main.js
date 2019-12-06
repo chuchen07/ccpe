@@ -36,7 +36,6 @@ class DXslider {
         this.left = true;
         this.duration = property.animDuration;
         this.easing = property.easing;
-
         this.img.appendChild(this.canvasBox);
         this.canvasBox.classList.add("canvas");
     }
@@ -83,7 +82,6 @@ class DXslider {
         this.width = this.lightenimg[0].width;
         this.height = this.lightenimg[0].height;
         this.dpi = this.width / this.imgWidth;
-
         this.img.style.height = this.canvasBox.style.height = this.imgWidth * this.height / this.width + "px";
 
         this.preButton.classList.add("after-loading");

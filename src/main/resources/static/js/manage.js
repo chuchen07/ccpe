@@ -1,3 +1,5 @@
+
+//上面的导航条
 $(function() {
     // 1.点击上部的li，当前li 添加current类，其余兄弟移除类
     $(".bar li").click(function() {
@@ -11,7 +13,7 @@ $(function() {
     });
 })
 
-
+//用户和权限的切换
 $(function() {
     // 1.点击上部的li，当前li 添加current类，其余兄弟移除类
     $(".col-md-3 li").click(function() {
@@ -25,7 +27,7 @@ $(function() {
     });
 })
 
-
+//视频管理和上传的切换
 $(function() {
     // 1.点击上部的li，当前li 添加current类，其余兄弟移除类
     $(".col-md-3 li").click(function() {
@@ -38,6 +40,8 @@ $(function() {
         $(".col-md-9 .item2").eq(index).show().siblings().hide();
     });
 })
+
+//题库管理和上传的切换
 $(function() {
     // 1.点击上部的li，当前li 添加current类，其余兄弟移除类
     $(".col-md-3 li").click(function() {
@@ -64,10 +68,8 @@ function ajaxGetData(currentPage) {
         type:"get",
         success:function(result){
 
-            // var data= JSON.parse(doc);
-            // cacheData.set()(currentPage,data);
-            // console.log("请求成功");
 
+//用户信息管理分页
             var users = result.list;
             $.each(users,function(index,item){
                 var userId =$("<td></td>").append("<input type='text' disabled='ture' value="+item.userId+">");
@@ -122,8 +124,6 @@ function ajaxGetData(currentPage) {
                         success: function (result) {
                             alert(result);
                         }
-
-
                     });
 
                 });
@@ -138,9 +138,54 @@ function ajaxGetData(currentPage) {
                     .appendTo("#users_table tbody");
             })
 
-
+            //用户信息管理结束
+            // var video = result.list;
+            // $.each(video,function(index,item){
+            //     var userId =$("<td></td>").append("<input type='text' disabled='ture' value="+item.userId+">");
+            //     var userName = $("<td></td>").append("<input type='text'  value="+item.userName+">");
+            //     var email = $("<td></td>").append("<input type='text' disabled='ture' value="+item.email+">");
+            //     var userCode = $("<td></td>").append("<input type='text'  value="+item.userCode+">");
+            //     var userState = $("<td></td>").append("<input type='text'  value="+item.userState+">");
+            //
+            //     var v_deleBtn=$("<button ></button>").addClass("btn btn-danger ")
+            //         .append($("<span></span>").addClass("glyphicon glyphicon-trash")).append("删除");
+            //
+            //
+            //     // onclick='javascript:this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);'
+            //
+            //     //删除按钮
+            //     v_deleBtn.attr("email",item.email);
+            //     v_deleBtn.click(function () {
+            //
+            //         $.ajax({
+            //
+            //             url:"/deleteUser?time="+new Date().getTime(),//解决数据缓存
+            //             data:"email="+v_deleBtn.attr("email"),
+            //             type:"get",
+            //             success:function(result){
+            //                 if(result==true){
+            //                     alert("成功：该用户已删除");
+            //                     ajaxGetData();
+            //                 }else{
+            //                     alert("失败：删除用户失败");
+            //                 }
+            //             }
+            //         });
+            //     });
+            //
+            //     var btn = $("<td></td>").append(" ").append(v_deleBtn)
+            //
+            //     $("<tr></tr>").append(userId)
+            //         .append(userName)
+            //         .append(email)
+            //         .append(userCode)
+            //         .append(userState)
+            //         .append(btn)
+            //         .appendTo("#video_table tbody");
+            // })
     }
 })
+
 //绑定a点击分页
 var oLi= document.getElementsByTagName("a");
 for (var i=0;i<oLi.length;i++){
@@ -149,6 +194,7 @@ for (var i=0;i<oLi.length;i++){
         ajaxGetData(currentPage);
     }
 }
+//以上用户信息管理分页结束
 
 
 function goTo() {
@@ -167,4 +213,4 @@ function goTo() {
     }
 }}
 
-
+//视频管理部分
