@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.weblade.ccpe.dao.FillBlankMapper">
+
+  <resultMap id="BaseResultMap" type="cn.weblade.ccpe.entity.FillBlank">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="fill_blank_id" jdbcType="INTEGER" property="fillBlankId" />
+    <result column="answer" jdbcType="VARCHAR" property="answer" />
+    <result column="paper_id" jdbcType="INTEGER" property="paperId" />
+    <result column="context" jdbcType="LONGVARCHAR" property="context" />
+  </resultMap>
+
+  <select id="selectFilByPaperId" parameterType="Integer" resultType="cn.weblade.ccpe.entity.FillBlank">
+    select * from fill_blank where paper_id=#{paperId}
+  </select>
+
+  <select id="queryFillBlankByListId" parameterType="List" resultType="cn.weblade.ccpe.entity.FillBlank">
+    select *  from fill_blank where
+      <foreach collection="list" item="item" index="index"  separator="or">
+        fill_blank_id = #{item}
+      </foreach>
+  </select>
+
+
+
+
+</mapper>
