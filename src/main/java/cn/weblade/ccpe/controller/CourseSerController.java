@@ -16,9 +16,9 @@ import java.util.Map;
 @RestController
 public class CourseSerController {
 
-    @RequestMapping("/")
+    @RequestMapping("/upload")
     public ModelAndView index(){
-        ModelAndView mv=new ModelAndView("user/upload");
+        ModelAndView mv=new ModelAndView("/upload");
         return mv;
     }
 

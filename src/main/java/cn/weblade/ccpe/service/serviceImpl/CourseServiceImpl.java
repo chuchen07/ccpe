@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,10 +44,6 @@ public class CourseServiceImpl implements CourseService {
         String fileName=file.getOriginalFilename();
         String filePath="C:\\Users\\Administrator\\Desktop\\";
         File subjectFile=new File(filePath+fileName);
-
-
-
-//        File file = new File("C:\\Users\\Administrator\\Desktop\\健康教育\\用户界面实验二软件1162欧阳颖儒.docx");
 
         String subjectContext=null;
         int chooseType=0;
@@ -194,6 +191,140 @@ public class CourseServiceImpl implements CourseService {
        paperMapper.PaperDelete(paperId);
         return 0;
 }
+
+    @Override
+    public Course subjectBrowse(MultipartFile file) throws Exception{
+        String fileName=file.getOriginalFilename();
+        String filePath="C:\\Users\\Administrator\\Desktop\\cache";
+        File subjectFile=new File(filePath+fileName);
+
+        String subjectContext=null;
+        int chooseType=0;
+        int choiceCount=0;
+        String[]choiceAnswer=new String[4];
+        Course course=new Course();
+        MultipleChoice multipleChoice=new MultipleChoice();
+        Judge judge=new Judge();
+        FillBlank fillBlank=new FillBlank();
+        file.transferTo(subjectFile);
+
+        List<MultipleChoice>multipleChoiceList=new ArrayList<>();
+        List<Judge>judgeList=new ArrayList<>();
+        List<FillBlank>fillBlankList=new ArrayList<>();
+
+//        /*插入试卷信息*/
+//        Paper paper=new Paper();
+//        paper.setPaperName(fileName);
+//        paperMapper.insertReKey(paper);
+//        multipleChoice.setPaperId(paper.getPaperId());
+//        fillBlank.setPaperId(paper.getPaperId());
+//        judge.setPaperId(paper.getPaperId());
+
+
+        try {
+            FileInputStream fis = new FileInputStream(subjectFile);
+            XWPFDocument xdoc = new XWPFDocument(fis);
+            List<XWPFParagraph> paras = xdoc.getParagraphs();
+            for (int i=0;i<paras.size();i++)//遍历段落
+            {
+                XWPFParagraph p=paras.get(i);
+                //获取段落的级别
+                String level = p.getStyleID();
+                if (level != null) {
+                    if (level.equals("1")&&p.getParagraphText().equals("选择题")) {//样式1为题型
+                        chooseType=1;
+                    }
+                    else if (level.equals("1")&&p.getParagraphText().equals("填空题")) {//样式1为题型
+                        chooseType=2;
+                    }
+                    else if (level.equals("1")&&p.getParagraphText().equals("判断题")) {//样式1为题型
+                        chooseType=3;
+                    }
+                    else {
+                        /*
+                         * 判断选择题后的操作
+                         * */
+                        if (chooseType==1){
+                            //样式2为内容
+                            if (level.equals("2")) {
+                                subjectContext = p.getParagraphText();
+                                multipleChoice.setContext(subjectContext);
+
+                            }
+                            //样式3为选项
+                            else if (level.equals("3")) {
+                                String choice = p.getParagraphText();
+                                choiceAnswer[choiceCount]=choice;
+                                choiceAnswer[choiceCount].trim();
+                                choiceCount++;
+                                //把存在数组的选项赋给实体，最多四个选项
+                                if(!paras.get(i+1).getStyleID().equals("3")){
+                                    multipleChoice.setAnswer1(choiceAnswer[0]);
+                                    multipleChoice.setAnswer2(choiceAnswer[1]);
+                                    multipleChoice.setAnswer3(choiceAnswer[2]);
+                                    multipleChoice.setAnswer4(choiceAnswer[3]);
+                                    choiceCount=0;
+
+                                }else {}
+                            }
+                            //样式4为答案
+                            else if (level.equals("4")){
+                                String answerTrue = p.getParagraphText().trim();
+                                multipleChoice.setAnswerTrue(answerTrue);
+                                multipleChoiceList.add(multipleChoice);
+                            }else{}
+                        }
+                        /*
+                         * 判断为填空题后的操作
+                         * */
+                        else if(chooseType==2){
+                            //样式2为内容
+                            if (level.equals("2")) {
+                                subjectContext = p.getParagraphText();
+                                fillBlank.setContext(subjectContext);
+                            }
+                            else if (level.equals("4")){
+                                String answer = p.getParagraphText().trim();
+                                fillBlank.setAnswer(answer);
+                                fillBlankList.add(fillBlank);
+                            }else {}
+                        }
+                        /*
+                         * 判断为判断题后的操作
+                         * */
+                        else if (chooseType==3){
+                            //样式2为内容
+                            if (level.equals("2")) {
+                                subjectContext = p.getParagraphText();
+                                judge.setContext(subjectContext);
+                                judge.toString();
+                            }else if (level.equals("4")){
+                                String answer = p.getParagraphText().trim();
+                                judge.setAnswer(answer);
+                                judgeList.add(judge);
+                            }else {}
+                        }
+                        //出现无格式文本
+                        else {
+                            System.out.println("无效文档"+p.getNumID());
+                        }
+                    }
+                }
+                else {
+                    System.out.println("无效文档"+p.getNumID());
+                }
+            }
+            fis.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        course.setMultipleChoiceList(multipleChoiceList);
+        course.setFillBlankList(fillBlankList);
+        course.setFillBlankList(fillBlankList);
+
+        return course;
+    }
 
 }
 
