@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.weblade.ccpe.dao.SubjectRecordMapper">
+  <resultMap id="BaseResultMap" type="cn.weblade.ccpe.entity.SubjectRecord">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="subject_record_id" jdbcType="INTEGER" property="subjectRecordId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="fill_blank_id" jdbcType="INTEGER" property="fillBlankId" />
+    <result column="judge_id" jdbcType="INTEGER" property="judgeId" />
+    <result column="multiple_choice_id" jdbcType="INTEGER" property="multipleChoiceId" />
+    <result column="user_answer" jdbcType="VARCHAR" property="userAnswer" />
+  </resultMap>
+
+
+</mapper>

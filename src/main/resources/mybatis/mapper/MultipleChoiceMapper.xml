@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.weblade.ccpe.dao.MultipleChoiceMapper">
+  <resultMap id="BaseResultMap" type="cn.weblade.ccpe.entity.MultipleChoice">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="multiple_choice_id" jdbcType="INTEGER" property="multipleChoiceId" />
+    <result column="answer1" jdbcType="VARCHAR" property="answer1" />
+    <result column="answer2" jdbcType="VARCHAR" property="answer2" />
+    <result column="answer3" jdbcType="VARCHAR" property="answer3" />
+    <result column="answer4" jdbcType="VARCHAR" property="answer4" />
+    <result column="answer_true" jdbcType="VARCHAR" property="answerTrue" />
+    <result column="paper_id" jdbcType="INTEGER" property="paperId" />
+    <result column="context" jdbcType="LONGVARCHAR" property="context" />
+  </resultMap>
+
+  <select id="selectMulByPaperId" parameterType="Integer" resultType="cn.weblade.ccpe.entity.MultipleChoice">
+    select * from multiple_choice where paper_id=#{paperId}
+  </select>
+
+
+  <select id="queryMultipleChoiceByListId" parameterType="List" resultType="cn.weblade.ccpe.entity.MultipleChoice">
+    select *  from multiple_choice where
+    <foreach collection="list" item="item" index="index"  separator="or">
+      multiple_choice_id = #{item}
+  </foreach>
+  </select>
+</mapper>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.weblade.ccpe.dao.PaperMapper">
+  <resultMap id="BaseResultMap" type="cn.weblade.ccpe.entity.Paper">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="paper_id" jdbcType="INTEGER" property="paperId" />
+    <id column="paper_name" jdbcType="VARCHAR" property="paperName" />
+  </resultMap>
+
+  <insert id="insertReKey" parameterType="List">
+    <selectKey keyProperty="paperId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into paper(paper_name) values (#{paperName})
+
+  </insert>
+</mapper>
