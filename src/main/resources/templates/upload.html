@@ -43,20 +43,13 @@
             var form = new FormData(); // FormData 对象
             form.append("file", fileObj);
             $.ajax({
-                url: "/subjectBrowse",
+                url: "/saveSubject",
                 contentType: false,//false 传输对象
                 processData: false,
                 type: "POST",
                 data: form,
                 success: function (ret) {
-                    if(ret.resCode != undefined){
-                        if(ret.resCode == '上传成功'){
-                            alert("上传成功")
-                        }
-                        else if(ret.resCode == '文件已存在，请先删除文件再上传'){
-                            alert("文件已存在，请先删除文件再上传")
-                        }
-                    }
+                    console.log(ret);
                 }
             })
 

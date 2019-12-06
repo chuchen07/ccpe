@@ -42,7 +42,7 @@ public class CourseServiceImpl implements CourseService {
     @Transactional
     public String saveSubject(MultipartFile file) throws Exception {
         String fileName=file.getOriginalFilename();
-        String filePath="C:\\Users\\Administrator\\Desktop\\";
+        String filePath="C:\\Users\\Administrator\\Desktop\\flyChichen";
         File subjectFile=new File(filePath+fileName);
 
         String subjectContext=null;
@@ -178,12 +178,10 @@ public class CourseServiceImpl implements CourseService {
     @Override
     @Transactional
     public int deleteSubject(String paperName) {
-        paperName="1.docx";
-        String filePath="C:\\Users\\Administrator\\Desktop\\";
-       File file=new File("C:\\Users\\Administrator\\Desktop\\1.docx");
+       String filePath="C:\\Users\\Administrator\\Desktop\\flyChichen\\";
+       File file=new File(filePath+paperName+".docx");
        file.delete();
-       int paperId=courseSerMapper.selectPaperByPaperName(paperName);
-
+       int paperId=courseSerMapper.selectPaperByPaperName(paperName+".docx");
 
        fillBlankMapper.FillBlankDelete(paperId);
        judgeMapper.JudgeDelete(paperId);
@@ -195,7 +193,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Course subjectBrowse(MultipartFile file) throws Exception{
         String fileName=file.getOriginalFilename();
-        String filePath="C:\\Users\\Administrator\\Desktop\\cache";
+        String filePath="C:\\Users\\Administrator\\Desktop\\flyChichen\\cache\\";
         File subjectFile=new File(filePath+fileName);
 
         String subjectContext=null;
@@ -203,23 +201,19 @@ public class CourseServiceImpl implements CourseService {
         int choiceCount=0;
         String[]choiceAnswer=new String[4];
         Course course=new Course();
+
+        /*实例化三个对象*/
         MultipleChoice multipleChoice=new MultipleChoice();
         Judge judge=new Judge();
         FillBlank fillBlank=new FillBlank();
+
+        /*保存*/
         file.transferTo(subjectFile);
 
+        /*实例化三个list*/
         List<MultipleChoice>multipleChoiceList=new ArrayList<>();
         List<Judge>judgeList=new ArrayList<>();
         List<FillBlank>fillBlankList=new ArrayList<>();
-
-//        /*插入试卷信息*/
-//        Paper paper=new Paper();
-//        paper.setPaperName(fileName);
-//        paperMapper.insertReKey(paper);
-//        multipleChoice.setPaperId(paper.getPaperId());
-//        fillBlank.setPaperId(paper.getPaperId());
-//        judge.setPaperId(paper.getPaperId());
-
 
         try {
             FileInputStream fis = new FileInputStream(subjectFile);
@@ -272,6 +266,8 @@ public class CourseServiceImpl implements CourseService {
                                 String answerTrue = p.getParagraphText().trim();
                                 multipleChoice.setAnswerTrue(answerTrue);
                                 multipleChoiceList.add(multipleChoice);
+                                /*再次实例化一个对象*/
+                                multipleChoice=new MultipleChoice();
                             }else{}
                         }
                         /*
@@ -287,6 +283,7 @@ public class CourseServiceImpl implements CourseService {
                                 String answer = p.getParagraphText().trim();
                                 fillBlank.setAnswer(answer);
                                 fillBlankList.add(fillBlank);
+                                fillBlank=new FillBlank();
                             }else {}
                         }
                         /*
@@ -302,6 +299,7 @@ public class CourseServiceImpl implements CourseService {
                                 String answer = p.getParagraphText().trim();
                                 judge.setAnswer(answer);
                                 judgeList.add(judge);
+                                judge=new Judge();
                             }else {}
                         }
                         //出现无格式文本
@@ -321,7 +319,7 @@ public class CourseServiceImpl implements CourseService {
         }
         course.setMultipleChoiceList(multipleChoiceList);
         course.setFillBlankList(fillBlankList);
-        course.setFillBlankList(fillBlankList);
+        course.setJudgeList(judgeList);
 
         return course;
     }

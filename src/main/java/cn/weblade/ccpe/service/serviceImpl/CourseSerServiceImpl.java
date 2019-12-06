@@ -13,7 +13,6 @@ import java.util.Map;
 
 @Service
 public class CourseSerServiceImpl implements CourseSerService {
-
     @Autowired
     private MultipleChoiceMapper multipleChoiceMapper;
     @Autowired
@@ -30,7 +29,6 @@ public class CourseSerServiceImpl implements CourseSerService {
     Map<Integer,Object>  map=new HashMap();
 
     @Override
-    @Transactional
     public int updateSubject() {
         return 0;
     }
@@ -46,45 +44,38 @@ public class CourseSerServiceImpl implements CourseSerService {
 
         return course;}
 
-
-        /*查试卷id的试卷名*/
+    /*查试卷id的试卷名*/
     @Override
     public int queryPaperNameById(String paperName) {
-
         return courseSerMapper.selectByPaperName(paperName);
     }
-
     /*查找所有的试卷名*/
     @Override
-    public List selectPaperName() {
+    public List<Paper>selectPaperName() {
         return courseSerMapper.selectPaperName();
     }
 
     /*查找所有的填空题*/
     @Override
     public List<FillBlank> queryAllFillBlank() {
-        return null;
+        return fillBlankMapper.queryAllFillBlank();
     }
 
     /*查找所有的判断题*/
     @Override
     public List<Judge> queryAllJudge() {
-        return null;
+        return judgeMapper.queryAllJudge();
     }
-
     /*查找所有的选择题*/
     @Override
     public List<MultipleChoice> queryAllMultipleChoice() {
-        return null;
+        return multipleChoiceMapper.queryAllMultipleChoice();
     }
-
 
     /*判断是否已存在*/
     public int isExist(String paperName){
-
         return courseSerMapper.selectByPaperName(paperName);
     }
-
 
     /*打分*/
     @Transactional
@@ -134,8 +125,6 @@ public class CourseSerServiceImpl implements CourseSerService {
         map.put("fillBlank",bFil);
         map.put("judge",bJud);
         map.put("multipleChoice",bMul);
-
-
         return map;
     }
 
@@ -146,7 +135,6 @@ public class CourseSerServiceImpl implements CourseSerService {
 
         /*查找全部错题的id*/
         List<SubjectRecord>list=subjectRecordMapper.queryAllRecordSubjectId(userId);
-
 
         List<Integer>fillBlankId=new ArrayList<>();
         List<Integer>multipleChoiceId=new ArrayList<>();
@@ -175,7 +163,6 @@ public class CourseSerServiceImpl implements CourseSerService {
     @Override
     @Transactional
     public Map<String,Object> correctWrongSubject(Integer userId, String[] fillBlank, String[] judge, String[] multipleChoice) {
-
         Course course=(Course) map.get(userId);
 
         /*获取答案*/
@@ -209,7 +196,6 @@ public class CourseSerServiceImpl implements CourseSerService {
                 subjectRecordMapper.mulOutOfRecord(userId,listMul.get(i).getMultipleChoiceId());
             }
         }
-
         Map<String,Object>ret=new HashMap<>();
         ret.put("fillBlank",bFil);
         ret.put("judge",bJud);
