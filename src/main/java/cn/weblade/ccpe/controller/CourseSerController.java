@@ -20,6 +20,11 @@ public class CourseSerController {
         ModelAndView mv=new ModelAndView("/exam");
         return mv;
     }
+    @RequestMapping("/h5")
+    public ModelAndView h5(){
+        ModelAndView mv=new ModelAndView("/h5");
+        return mv;
+    }
 
 
     @Autowired

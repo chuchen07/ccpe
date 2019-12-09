@@ -14,8 +14,14 @@ import java.util.Map;
 //shiro配置类
 @Configuration
 public class ShiroConfig {
+
     //创建ShiroFilterFactoryBean
 
+
+
+    /*
+    1。创建ShiroFilterFactoryBean
+     */
 
     @Bean
     public ShiroFilterFactoryBean getShiroFilterFactoryBean(@Qualifier("securityManager") DefaultWebSecurityManager securityManager){
@@ -23,14 +29,22 @@ public class ShiroConfig {
         //1.设置安全管理器
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         //添加shiro内置过滤器
-/**
+
+
+        /*
+
          * 常用的过滤器：
          *  anon:无需认证既可以登录
          *  authc：必须认证才可以登录
          *  user：如果使用rememberMe的功能可以直接访问
          *  perms:该资源必须得到资源权限才可以访问
+
          *  role:该资源必须得到角色权限才可以访问*/
 
+
+
+         /*  role:该资源必须得到角色权限才可以访问
+         */
 
         Map<String,String> filterMap = new LinkedHashMap<String,String>();
 
@@ -38,9 +52,14 @@ public class ShiroConfig {
 
         //TODO
         // 待删deleteUser
+
          filterMap.put("/*","anon");
-        /*filterMap.put("/updateUser","anon");
+        filterMap.put("/updateUser","anon");
        filterMap.put("/deleteUser","anon");
+
+        filterMap.put("/updateUser","anon");
+        filterMap.put("/deleteUser","anon");
+
         filterMap.put("/exam","anon");
         filterMap.put("/answer","anon");
         filterMap.put("/course","anon");
@@ -51,6 +70,12 @@ public class ShiroConfig {
         filterMap.put("/index","anon");
         filterMap.put("/emailcheck","anon");
         filterMap.put("/login","anon");
+
+        filterMap.put("/registerPage","anon");
+        filterMap.put("/register","anon");
+        filterMap.put("/registerCheck","anon");
+        filterMap.put("/static/*","anon");
+        filterMap.put("/logout","logout");
         filterMap.put("/registerPage","anon");
         filterMap.put("/register","anon");
         filterMap.put("/registerCheck","anon");
@@ -61,7 +86,8 @@ public class ShiroConfig {
         filterMap.put("/exam","anon");
         filterMap.put("/*","anon");
         filterMap.put("/*","authc");
-*/
+
+
        //设置未授权界面
       shiroFilterFactoryBean.setUnauthorizedUrl("/unauthorize_Page");
        shiroFilterFactoryBean.setLoginUrl("/loginPage");
@@ -70,8 +96,14 @@ public class ShiroConfig {
         return shiroFilterFactoryBean;
     }
 
+
     //2.创建DefaultWebSecuritiyMannager
 
+
+
+    /*
+    2.创建DefaultWebSecuritiyMannager
+     */
 
     @Bean(name="securityManager")
     public DefaultWebSecurityManager getDefaultWebSecurityManager(@Qualifier("userRealm")UserRealm userRealm){
@@ -81,8 +113,14 @@ public class ShiroConfig {
         return securityManager;
     }
 
+
     //3.创建Realm
 
+
+
+    /*
+    3.创建Realm
+     */
 
     @Bean(name = "userRealm")
     public UserRealm getUserRealm(){

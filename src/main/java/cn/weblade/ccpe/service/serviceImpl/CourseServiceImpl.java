@@ -42,7 +42,7 @@ public class CourseServiceImpl implements CourseService {
     @Transactional
     public String saveSubject(MultipartFile file) throws Exception {
         String fileName=file.getOriginalFilename();
-        String filePath="C:\\Users\\Administrator\\Desktop\\flyChichen";
+        String filePath="C:\\Users\\pc\\Desktop\\flyChicken";
         File subjectFile=new File(filePath+fileName);
 
         String subjectContext=null;
@@ -178,7 +178,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     @Transactional
     public int deleteSubject(String paperName) {
-       String filePath="C:\\Users\\Administrator\\Desktop\\flyChichen\\";
+       String filePath="C:\\Users\\pc\\Desktop\\flyChicken\\";
        File file=new File(filePath+paperName+".docx");
        file.delete();
        int paperId=courseSerMapper.selectPaperByPaperName(paperName+".docx");
@@ -193,7 +193,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Course subjectBrowse(MultipartFile file) throws Exception{
         String fileName=file.getOriginalFilename();
-        String filePath="C:\\Users\\Administrator\\Desktop\\flyChichen\\cache\\";
+        String filePath="C:\\Users\\pc\\Desktop\\flyChicken\\cache\\";
         File subjectFile=new File(filePath+fileName);
 
         String subjectContext=null;

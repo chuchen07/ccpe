@@ -103,12 +103,15 @@
                         </div>
 
                     </div>
-                    <div class="item">
-                        <btn id="quanxian"></btn>
+<!--                    权限-->
+                    <div class="item" onload="role_test()">
+
+
                     </div>
                 </div>
             </div>
         </div>
+
         <!-- 视频管理模块 -->
         <div class="view">
 
@@ -133,14 +136,20 @@
                             <h1>视频管理
                                 <h1>
                         </div>
-                        <div>
-                            <input id="input" class="form-control selectInput" name="input" placeholder="请选择"/>
-                            <select class="form-control" id="spec_num0" name="spec_num" οnchange="document.getElementById('input0').value=$('#spec_num0 option:selected').text()">
+                        <div class="row">
+                            <div class="col-md-2 col-md-offset-1">请您先选择课程类型：</div>
+                            <div class="col-md-2">
+                            <select placeholder="请选择" class="form-control" id="spec_num0" name="spec_num" οnchange="document.getElementById('input0').value=$('#spec_num0 option:selected').text()">
                                 <option value="first">初级课程</option>
                                 <option value="second">进阶课程</option>
                                 <option value="three">高级课程</option>
                                 <option value="four">会员课程</option>
                             </select>
+                            </div>
+                            <div class="col-md-1 col-md-offset-1">课程名称：</div>
+                            <div class="col-md-3 ">
+                            <input type="text" class="form-control" id="" />
+                            </div>
 
                         </div>
 
@@ -220,7 +229,7 @@
                             <h1>题库管理
                                 <h1>
                         </div>
-                        <table class="table table-striped" id="test_table">
+                        <table class=" table table-striped" id="test_table" onload="onloadh5()">
 
                             <thead>
                             <tr>
@@ -271,8 +280,6 @@
 
     </div>
 
-
-
 </div>
 
 
@@ -283,6 +290,7 @@
 <script src="js/manage.js"></script>
 <script src="js/video.js"></script>
 <script src="js/test.js"></script>
+<script src="js/role.js"></script>
 <script src="js/myAjax.js"></script>
 <script>
     layui.use('upload', function() {

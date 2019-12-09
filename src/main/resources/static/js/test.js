@@ -5,6 +5,7 @@ function ajaxGetData(currentPage) {
     $.ajax({
         url:"/queryAllPaperName",
         type:"get",
+        data:"",
         success:function(result){
 
             //用户信息管理结束
@@ -60,3 +61,15 @@ function ajaxGetData(currentPage) {
             }//读取方法
         }
     }}
+//      function onloadh5(){
+//         $.ajax(
+//             {
+//         url:"/queryAllPaperName",
+//         type:"get",
+//         data:"",
+//         success:function(result){
+//             // console.log(result)
+//             alert(result)
+//             ;   }
+//     })
+// }
