@@ -1,9 +1,6 @@
 package cn.weblade.ccpe.controller;
 
-import cn.weblade.ccpe.entity.Course;
-import cn.weblade.ccpe.entity.FillBlank;
-import cn.weblade.ccpe.entity.Judge;
-import cn.weblade.ccpe.entity.MultipleChoice;
+import cn.weblade.ccpe.entity.*;
 import cn.weblade.ccpe.service.CourseSerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,11 +13,23 @@ import java.util.Map;
 @RestController
 public class CourseSerController {
 
-    @RequestMapping("/")
-    public ModelAndView index(){
-        ModelAndView mv=new ModelAndView("user/upload");
+    @RequestMapping("/upload")
+    public ModelAndView upload(){
+        ModelAndView mv=new ModelAndView("/upload");
         return mv;
     }
+
+    @RequestMapping("/exam")
+    public ModelAndView exam(){
+        ModelAndView mv=new ModelAndView("/exam");
+        return mv;
+    }
+    @RequestMapping("/h5")
+    public ModelAndView h5(){
+        ModelAndView mv=new ModelAndView("/h5");
+        return mv;
+    }
+
 
     @Autowired
     private CourseSerService courseSerService;
@@ -40,39 +49,39 @@ public class CourseSerController {
 
     /*查找全部试卷名称*/
     @RequestMapping("/queryAllPaperName")
-    public List queryAllPaperName(){
+    public List<Paper> queryAllPaperName(){
         return  courseSerService.selectPaperName();
     }
 
     /*查找全部选择题*/
     @RequestMapping("/queryAllMultipleChoice")
     public List<MultipleChoice>queryAllMultipleChoice(){
-        return  courseSerService.selectPaperName();
+        return  courseSerService.queryAllMultipleChoice();
     }
 
     /*查找全部判断题*/
     @RequestMapping("/queryAllJudge")
     public List<Judge> queryAllJudge(){
-        return  courseSerService.selectPaperName();
+        return  courseSerService.queryAllJudge();
     }
 
     /*查找全部填空题*/
     @RequestMapping("/queryAllFillBlank")
     public List<FillBlank> queryAllFillBlank(){
-        return  courseSerService.selectPaperName();
+        return  courseSerService.queryAllFillBlank();
     }
 
     /*批改试卷*/
     @RequestMapping("/correctPaper")
     public Map<String,Object> correctPaper(Integer paperId,Integer userId,String[] fillBlank, String[]judge, String[]multipleChoice){
-        paperId=44;
-        userId=1;
-        fillBlank=new String[10];
-        fillBlank[0]="a";
-        multipleChoice=new String[10];
-        multipleChoice[0]="C";
-        judge=new String[10];
-        judge[0]="错";
+//        paperId=44;
+//        userId=1;
+//        fillBlank=new String[10];
+//        fillBlank[0]="a";
+//        multipleChoice=new String[10];
+//        multipleChoice[0]="C";
+//        judge=new String[10];
+//        judge[0]="错";
 
 
         Map<String,Object>map=courseSerService.correctPaper(paperId,userId,fillBlank,judge,multipleChoice);
@@ -91,13 +100,13 @@ public class CourseSerController {
     /*错题集批改*/
     @RequestMapping("/correctWrongSubject")
     public Map<String,Object> correctWrongSubject(Integer userId,String[] fillBlank, String[]judge, String[]multipleChoice){
-        userId=1;
-        fillBlank=new String[10];
-        fillBlank[0]="a";
-        multipleChoice=new String[10];
-        multipleChoice[0]="C";
-        judge=new String[10];
-        judge[0]="错";
+//        userId=1;
+//        fillBlank=new String[10];
+//        fillBlank[0]="a";
+//        multipleChoice=new String[10];
+//        multipleChoice[0]="C";
+//        judge=new String[10];
+//        judge[0]="错";
 
         Map<String,Object> ret=courseSerService.correctWrongSubject(userId,fillBlank,judge,multipleChoice);
 

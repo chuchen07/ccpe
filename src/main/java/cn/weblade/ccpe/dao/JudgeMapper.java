@@ -16,5 +16,6 @@ public interface JudgeMapper  extends Mapper<Judge>,MySqlMapper<Judge>{
     public List<Judge> queryAllJudge();
     @Select("select answer,judge_id from judge where paper_id=#{paperId}")
     public List<Judge> queryJudgeAnswerTrue(int paperId);
+
     public List<Judge> queryJudgeByListId(List<Integer> JudgeId);
 }

@@ -1,6 +1,7 @@
 package cn.weblade.ccpe.dao;
 
 import cn.weblade.ccpe.entity.Course;
+import cn.weblade.ccpe.entity.Paper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.*;
@@ -12,8 +13,8 @@ public interface CourseSerMapper extends Mapper<Course>,MySqlMapper<Course>{
     @Select("select paper_id from paper where paper_name=#{paperName}")
     public Integer selectByPaperName(String paperName);
 
-    @Select("select paper_name from paper where 1=1")
-    public List selectPaperName();
+    @Select("select paper_id,paper_name from paper where 1=1")
+    public List<Paper>selectPaperName();
 
 
 

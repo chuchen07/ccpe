@@ -1,5 +1,6 @@
 package cn.weblade.ccpe.controller;
 
+import cn.weblade.ccpe.entity.Course;
 import cn.weblade.ccpe.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,5 +26,14 @@ public class CourseController {
 
         courseService.deleteSubject(paperName);
         return 0;
+    }
+
+
+    /*预览题，不添加进数据库*/
+    @RequestMapping("/subjectBrowse")
+    public Course subjectBrowse(MultipartFile file) throws Exception {
+
+        Course ret=courseService.subjectBrowse(file);
+        return ret;
     }
 }

@@ -54,15 +54,6 @@ public class ShiroConfig {
         filterMap.put("/registerCheck","anon");
       filterMap.put("/static/*","anon");
        filterMap.put("/logout","logout");
-        filterMap.put("/registerPage","anon");
-        filterMap.put("/register","anon");
-        filterMap.put("/registerCheck","anon");
-        filterMap.put("/static/*","anon");
-        filterMap.put("/logout","logout");
-        filterMap.put("/subjectBrowse","anon");
-        filterMap.put("/upload","anon");
-        filterMap.put("/exam","anon");
-        filterMap.put("/*","anon");
         filterMap.put("/*","authc");
 
        //设置未授权界面
