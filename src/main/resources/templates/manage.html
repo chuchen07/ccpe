@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -229,13 +231,18 @@
                             <h1>题库管理
                                 <h1>
                         </div>
-                        <table class=" table table-striped" id="test_table" onload="onloadh5()">
+                        <table class=" table table-striped" id="test_table">
 
-                            <thead>
+                            <thead id="queryAllName">
                             <tr>
                                 <th>试题名称</th>
 
                                 <th>删除</th>
+                            </tr>
+
+                            <tr th:each="list : ${list}">
+                                <th th:text="${list.getPaperId()}"></th>
+                                <th th:text="${list.getPaperName()}"></th>
                             </tr>
                             </thead>
                             <tbody id="nr">

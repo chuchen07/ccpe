@@ -3,14 +3,17 @@ package cn.weblade.ccpe.controller;
 import cn.weblade.ccpe.entity.*;
 import cn.weblade.ccpe.service.CourseSerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Map;
 
-@RestController
+@Controller
 public class CourseSerController {
 
     @RequestMapping("/upload")
@@ -49,8 +52,12 @@ public class CourseSerController {
 
     /*查找全部试卷名称*/
     @RequestMapping("/queryAllPaperName")
-    public List<Paper> queryAllPaperName(){
-        return  courseSerService.selectPaperName();
+    @ResponseBody
+    public List<Paper> queryAllPaperName(Model model){
+        List<Paper>list=courseSerService.selectPaperName();
+        model.addAttribute("list", list);
+        return  list;
+
     }
 
     /*查找全部选择题*/
