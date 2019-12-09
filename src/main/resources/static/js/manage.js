@@ -11,19 +11,42 @@ $(function() {
         // 3.让下部里面相应索引号的item显示，其余的item隐藏
         $(".tab .view").eq(index).show().siblings().hide();
     });
-})
+        $.ajax({
+            url:"/getAllRolePermission?time="+new Date().getTime(),
+            success:function(result){
+                $.each(result,function (index,n) {
+                    var rid = $("<td></td>").append(n.rid);
+                    var rname = $("<td></td>").append(n.rname);
+                    var pid = $("<td></td>").append(n.pid);
+                    var pname = $("<td></td>").append(n.pname);
+                    $("<tr></tr>tr>").append(rid)
+                        .append(rname).append(pid).append(pname).appendTo($("#test"));
+                })
+            }
+        })
+}
+
+)
 
 //用户和权限的切换
 $(function() {
     // 1.点击上部的li，当前li 添加current类，其余兄弟移除类
     $(".col-md-3 li").click(function() {
+
         // 链式编程操作
         $(this).addClass("current").siblings().removeClass("current");
         // 2.点击的同时，得到当前li 的索引号
         var index = $(this).index();
         console.log(index);
         // 3.让下部里面相应索引号的item显示，其余的item隐藏
-        $(".col-md-9 .item").eq(index).show().siblings().hide();
+
+            $(".col-md-9 .item").eq(index).show().siblings().hide();
+
+
+
+
+
+
     });
 })
 
@@ -36,7 +59,7 @@ $(function() {
         // 2.点击的同时，得到当前li 的索引号
         var index = $(this).index();
         console.log(index);
-        // 3.让下部里面相应索引号的item显示，其余的item隐藏
+        // 3.让下部里面相应索引号的item3显示，其余的item2隐藏
         $(".col-md-9 .item2").eq(index).show().siblings().hide();
     });
 })
@@ -45,6 +68,10 @@ $(function() {
 $(function() {
     // 1.点击上部的li，当前li 添加current类，其余兄弟移除类
     $(".col-md-3 li").click(function() {
+        $.ajax({
+            url:"/queryVideoByCourseAndName",
+            type:"post"
+        })
         // 链式编程操作
         $(this).addClass("current3").siblings().removeClass("current3");
         // 2.点击的同时，得到当前li 的索引号

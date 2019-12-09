@@ -104,7 +104,7 @@
 
                     </div>
 <!--                    权限-->
-                    <div class="item" onload="role_test()">
+                    <div class="item" onload="role_test()" id="test">
 
 
                     </div>
@@ -139,16 +139,16 @@
                         <div class="row">
                             <div class="col-md-2 col-md-offset-1">请您先选择课程类型：</div>
                             <div class="col-md-2">
-                            <select placeholder="请选择" class="form-control" id="spec_num0" name="spec_num" οnchange="document.getElementById('input0').value=$('#spec_num0 option:selected').text()">
-                                <option value="first">初级课程</option>
-                                <option value="second">进阶课程</option>
-                                <option value="three">高级课程</option>
-                                <option value="four">会员课程</option>
-                            </select>
+                                <select placeholder="请选择" class="form-control" id="spec_num0" name="spec_num" οnchange="document.getElementById('input0').value=$('#spec_num0 option:selected').text()">
+                                    <option value="first">初级课程</option>
+                                    <option value="second">进阶课程</option>
+                                    <option value="three">高级课程</option>
+                                    <option value="four">会员课程</option>
+                                </select>
                             </div>
                             <div class="col-md-1 col-md-offset-1">课程名称：</div>
                             <div class="col-md-3 ">
-                            <input type="text" class="form-control" id="" />
+                                <input type="text" class="form-control" id="" />
                             </div>
 
                         </div>
@@ -160,6 +160,11 @@
                                 <th>视频名称</th>
                                 <th>课程类型</th>
                                 <th>删除</th>
+                            <tr th:each="video:${videoList}">
+                                <td th:text="${video.videoName}"></td>
+                                <td th:text="${video.courseName}"></td>
+                                <a class="btn btn-sm btn-primary" th:href="@{/deletevideo/?}+${video.videoId}">编辑</a>
+                                <td>
                             </tr>
                             </thead>
                             <tbody id="nr">
@@ -181,7 +186,7 @@
                             </fieldset>
 
                             <div class="layui-upload">
-                                <button type="button" class="layui-btn layui-btn-normal" id="testList">选择多文件</button>
+                                <button type="button" class="layui-btn layui-btn-normal" id="testList">选择视频</button>
                                 <div class="layui-upload-list">
                                     <table class="layui-table">
                                         <thead>
@@ -190,6 +195,7 @@
                                             <th>大小</th>
                                             <th>状态</th>
                                             <th>操作</th>
+                                            <th>课程归属</th>
                                         </tr>
                                         </thead>
                                         <tbody id="demoList"></tbody>
@@ -288,10 +294,12 @@
 <script src="js/pinterest_grid.js"></script>
 <script src="layui/layui.js"></script>
 <script src="js/manage.js"></script>
-<script src="js/video.js"></script>
 <script src="js/test.js"></script>
 <script src="js/role.js"></script>
+<script src="js/video.js"></script>
 <script src="js/myAjax.js"></script>
+<script src="layui/layui.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
     layui.use('upload', function() {
         var $ = layui.jquery,
@@ -302,7 +310,7 @@
         var demoListView = $('#demoList'),
             uploadListIns = upload.render({
                 elem: '#testList',
-                url: '/upload/',
+                url: '/UploadVideo',
                 accept: 'file',
                 multiple: true,
                 auto: false,
@@ -311,7 +319,12 @@
                     var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
                     //读取本地文件
                     obj.preview(function(index, file, result) {
-                        var tr = $(['<tr id="upload-' + index + '">', '<td>' + file.name + '</td>', '<td>' + (file.size / 1014).toFixed(1) + 'kb</td>', '<td>等待上传</td>', '<td>', '<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>', '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>', '</td>', '</tr>'].join(''));
+                        var tr = $(['<tr id="upload-' + index + '">', '<td>' + file.name + '</td>', '<td>' + (file.size / 1014).toFixed(1) + 'kb</td>', '<td>等待上传</td>', '<td>', '<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>', '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>', '</td>', '<td>','<select id="t' + index + '"  name="quiz2">' +
+                        '                    <option value="" selected="selected">请选择课程归属</option>' +
+                        '                    <option value="初级">初级</option>' +
+                        '                    <option value="中级">中级</option>' +
+                        '                    <option value="高级">高级</option>' +
+                        '                </select>','</td>','</tr>'].join(''));
 
                         //单个重传
                         tr.find('.demo-reload').on('click', function() {
@@ -334,6 +347,16 @@
                             tds = tr.children();
                         tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
                         tds.eq(3).html(''); //清空操作
+                        tds.eq(4).html('<span style="color: red;">'+$('#t'+index).val()+'</span>');
+                        $.ajax({
+                            type: 'post',
+                            url: '/UploadVideo2',
+                            data: {
+                                videoId: res.videoId,
+                                courseName: tds.eq(4).text()
+                            }
+                        });
+
                         return delete this.files[index]; //删除文件队列已经上传成功的文件
                     }
                     this.error(index, upload);
@@ -345,8 +368,9 @@
                     tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
                 }
             });
-
     });
+
+
 </script>
 </body>
 
