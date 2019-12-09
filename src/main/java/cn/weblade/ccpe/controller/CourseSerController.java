@@ -13,11 +13,7 @@ import java.util.Map;
 @RestController
 public class CourseSerController {
 
-    @RequestMapping("/upload")
-    public ModelAndView upload(){
-        ModelAndView mv=new ModelAndView("/upload");
-        return mv;
-    }
+
 
     @RequestMapping("/exam")
     public ModelAndView exam(){
