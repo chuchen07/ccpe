@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.weblade.ccpe.dao.CourseMapper">
+
+    <resultMap type="cn.weblade.ccpe.entity.Video" id="videoMap">
+        <id column="video_id" property="videoId"/>
+        <result column="video_name" property="videoName"/>
+        <result column="course_name" property="courseName"/>
+        <result column="video_src" property="videoSrc"/>
+        <result column="video_path" property="videoPath"/>
+    </resultMap>
+
+    <!--返回视频列表-->
+    <select id="getvideo" parameterType="cn.weblade.ccpe.entity.Video" resultMap="videoMap">
+        select * from video
+        <where>
+            <if test="courseName != null and courseName !='' "> and course_name=#{courseName}
+            </if>
+            <if test="videoName != null and videoName !='' "> and video_name like '%' #{videoName} '%'
+            </if>
+        </where>
+    </select>
+
+    <select id="test" resultMap="videoMap">
+        select * from video
+    </select>
+
+
+
+</mapper>

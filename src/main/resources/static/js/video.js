@@ -4,20 +4,14 @@ function ajaxGetData(currentPage) {
     $("#video_table tbody").empty();
     var currentPage=currentPage || 2;
     $.ajax({
-        url:"/data",
-        data:{currentPage:currentPage,pageAmount:5},
-        type:"get",
+        url:"/queryVideoByCourseAndName",
+        type:"post",
         success:function(result){
 
+            $.each(result,function(index,item2){
 
-
-
-            //用户信息管理结束
-            var video = result.list;
-            $.each(video,function(index,item2){
-
-                var userName = $("<td></td>").append(item2.userName);
-                var email = $("<td></td>").append(item2.email);
+                var videoName = $("<td></td>").append(item2.videoName);
+                var courseName = $("<td></td>").append(item2.courseName);
 
 
                 var v_deleBtn=$("<button ></button>").addClass("btn btn-danger ")
@@ -27,20 +21,22 @@ function ajaxGetData(currentPage) {
                 // onclick='javascript:this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);'
 
                 //删除按钮
-                v_deleBtn.attr("email",item2.email);
+                v_deleBtn.attr("delete",item2.email);
                 v_deleBtn.click(function () {
 
                     $.ajax({
 
-                        url:"/deleteUser?time="+new Date().getTime(),//解决数据缓存
-                        data:"email="+v_deleBtn.attr("email"),
-                        type:"get",
+                        url:"/deletevideo",
+                        data:{
+                            videoId: item2.videoId
+                        },
+                        type:"post",
                         success:function(result){
-                            if(result==true){
-                                alert("成功：该用户已删除");
+                            if(result.deletevideo==1){
+                                alert("成功：该视频已删除");
                                 ajaxGetData();
                             }else{
-                                alert("失败：删除用户失败");
+                                alert("失败：删除视频失败");
                             }
                         }
                     });
@@ -49,8 +45,8 @@ function ajaxGetData(currentPage) {
                 var btn = $("<td></td>").append(" ").append(v_deleBtn)
 
                 $("<tr></tr>")
-                    .append(userName)
-                    .append(email)
+                    .append(videoName)
+                    .append(courseName)
 
                     .append(btn)
                     .appendTo("#video_table tbody");

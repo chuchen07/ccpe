@@ -1,6 +1,7 @@
 package cn.weblade.ccpe.dao;
 
 import cn.weblade.ccpe.entity.User;
+import cn.weblade.ccpe.entity.rolepermission;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
@@ -42,5 +43,5 @@ public interface UserMapper {
     public boolean updateUser(User user);
 
     //获取权限列表
-
+    public List<rolepermission> getAllRolePermission();
 }

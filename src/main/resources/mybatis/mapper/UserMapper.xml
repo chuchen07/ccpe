@@ -60,5 +60,11 @@
     <update id="updateUser" parameterType="cn.weblade.ccpe.entity.User">
         UPDATE `user` SET userName=#{userName},userState=#{userState} WHERE email=#{email};
     </update>
-    
+
+
+    <!--public List<rolepermission> getAllRolePermission();-->
+    <select id="getAllRolePermission" resultType="cn.weblade.ccpe.entity.rolepermission">
+        SELECT role.rid,role.rname,permission.pid,permission.pname from role LEFT JOIN role_permission ON role.rid = role_permission.rid LEFT JOIN
+        permission on role_permission.pid = permission.pid;
+    </select>
 </mapper>
