@@ -53,9 +53,9 @@ public class ShiroConfig {
         //TODO
         // 待删deleteUser
 
-         filterMap.put("/*","anon");
-        filterMap.put("/updateUser","anon");
-       filterMap.put("/deleteUser","anon");
+        filterMap.put("/*","anon");
+ /*       filterMap.put("/updateUser","anon");
+        filterMap.put("/deleteUser","anon");
 
         filterMap.put("/updateUser","anon");
         filterMap.put("/deleteUser","anon");
@@ -85,7 +85,7 @@ public class ShiroConfig {
         filterMap.put("/upload","anon");
         filterMap.put("/exam","anon");
         filterMap.put("/*","anon");
-        filterMap.put("/*","authc");
+        filterMap.put("/*","authc");*/
 
 
        //设置未授权界面
