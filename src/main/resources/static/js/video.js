@@ -2,7 +2,7 @@ ajaxGetData();
 var cacheData= goTo();//读取缓存的对象
 function ajaxGetData(currentPage) {
     $("#video_table tbody").empty();
-    var currentPage=currentPage || 2;
+    var currentPage=currentPage || 1;
     $.ajax({
         url:"/queryVideoByCourseAndName",
         type:"post",

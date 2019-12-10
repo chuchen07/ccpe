@@ -15,11 +15,11 @@ $(function() {
             url:"/getAllRolePermission?time="+new Date().getTime(),
             success:function(result){
                 $.each(result,function (index,n) {
-                    var rid = $("<td></td>").append(n.rid);
-                    var rname = $("<td></td>").append(n.rname);
-                    var pid = $("<td></td>").append(n.pid);
-                    var pname = $("<td></td>").append(n.pname);
-                    $("<tr></tr>tr>").append(rid)
+                    var rid = $("<td style='width: 200px' bgcolor='#d3d3d3'></td>").append(n.rid);
+                    var rname = $("<td style='width: 200px' ></td>").append(n.rname);
+                    var pid = $("<td style='width: 200px' bgcolor='#d3d3d3'></td>").append(n.pid);
+                    var pname = $("<td style='width: 200px'></td>").append(n.pname);
+                    $("<tr></tr>").append(rid)
                         .append(rname).append(pid).append(pname).appendTo($("#test"));
                 })
             }
@@ -31,7 +31,7 @@ $(function() {
 //用户和权限的切换
 $(function() {
     // 1.点击上部的li，当前li 添加current类，其余兄弟移除类
-    $(".col-md-3 li").click(function() {
+    $(".col-md-2 li").click(function() {
 
         // 链式编程操作
         $(this).addClass("current").siblings().removeClass("current");
@@ -40,7 +40,7 @@ $(function() {
         console.log(index);
         // 3.让下部里面相应索引号的item显示，其余的item隐藏
 
-            $(".col-md-9 .item").eq(index).show().siblings().hide();
+            $(".col-md-10 .item").eq(index).show().siblings().hide();
 
 
 
@@ -53,7 +53,7 @@ $(function() {
 //视频管理和上传的切换
 $(function() {
     // 1.点击上部的li，当前li 添加current类，其余兄弟移除类
-    $(".col-md-3 li").click(function() {
+    $(".col-md-2 li").click(function() {
         // 链式编程操作
         $(this).addClass("current2").siblings().removeClass("current2");
         // 2.点击的同时，得到当前li 的索引号
@@ -65,14 +65,14 @@ $(function() {
         console.log(index);
         // 3.让下部里面相应索引号的item3显示，其余的item2隐藏
 
-        $(".col-md-9 .item2").eq(index).show().siblings().hide();
+        $(".col-md-10 .item2").eq(index).show().siblings().hide();
     });
 })
 
 //题库管理和上传的切换
 $(function() {
     // 1.点击上部的li，当前li 添加current类，其余兄弟移除类
-    $(".col-md-3 li").click(function() {
+    $(".col-md-2 li").click(function() {
 
             console.log(".....................");
     $.ajax({
@@ -95,7 +95,7 @@ $(function() {
         var index = $(this).index();
         console.log(index);
         // 3.让下部里面相应索引号的item显示，其余的item隐藏
-        $(".col-md-9 .item3").eq(index).show().siblings().hide();
+        $(".col-md-10 .item3").eq(index).show().siblings().hide();
     });
 })
 
@@ -112,16 +112,15 @@ function ajaxGetData(currentPage) {
         type:"get",
         success:function(result){
 
-
 //用户信息管理分页
             var users = result.list;
             $.each(users,function(index,item){
-                var userId =$("<td></td>").append("<input type='text' disabled='ture' value="+item.userId+">");
-                var userName = $("<td></td>").append("<input type='text'  value="+item.userName+">");
-                var email = $("<td></td>").append("<input type='text' disabled='ture' value="+item.email+">");
-                var userCode = $("<td></td>").append("<input type='text'  value="+item.userCode+">");
-                var userState = $("<td></td>").append("<input type='text'  value="+item.userState+">");
-                var editBtn	= $("<button></button>").addClass("btn btn-primary btn-sm")
+                var userId =$("<td></td>").append("<input type='text' style='border: 0px' disabled='ture' value="+item.userId+">");
+                var userName = $("<td></td>").append("<input type='text' style='border: 0px' value="+item.userName+">");
+                var email = $("<td></td>").append("<input type='text' style='border: 0px' disabled='ture' value="+item.email+">");
+                var userCode = $("<td></td>").append("<input type='text' style='border: 0px' value="+item.userCode+">");
+                var userState = $("<td></td>").append("<input type='text' style='border: 0px' value="+item.userState+">");
+                var editBtn	= $("<button style='width: 68px;height: 34px'></button>").addClass("btn btn-primary btn-sm")
                     .append($("<span></span>").addClass("glyphicon glyphicon-edit")).append("编辑");
                 var deleBtn=$("<button ></button>").addClass("btn btn-danger ")
                     .append($("<span></span>").addClass("glyphicon glyphicon-trash")).append("删除");
@@ -213,4 +212,4 @@ function goTo() {
     }
 }}
 
-//视频管理部分
+

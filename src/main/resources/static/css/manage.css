@@ -4,7 +4,7 @@
 }
 
 body {
-    background-color: #69ffbe;
+    background-color: #fff;
 }
 
 li {
@@ -77,9 +77,10 @@ li {
 
 .ad {
     height: 300px;
-    background-color: #ffece7;
+    background-color: #eee;
     line-height: 300px;
     color: #000;
+    font-size: 26px;
 }
 
 @keyframes move {
@@ -90,7 +91,7 @@ li {
 
     /* 结束状态 */
     100% {
-        transform: translateX(200px);
+        transform: translateX(160px);
     }
 }
 #ad_text{
