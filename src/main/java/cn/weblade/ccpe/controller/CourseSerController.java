@@ -117,5 +117,15 @@ public class CourseSerController {
     }
 
 
+   //测试播放
+    @RequestMapping("/video")
+    public ModelAndView watchvideo(String courseName){
+        ModelAndView model= new ModelAndView();
+        model.addObject("videoback",courseSerService.selectvideobyCourse(courseName));
+        model.setViewName("watchVideo");
+        return model;
+    }
+
+
 
 }

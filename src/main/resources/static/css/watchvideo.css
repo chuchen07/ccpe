@@ -1,0 +1,31 @@
+#listandplayer{
+    width: 100%;
+    height: 600px;
+}
+
+#dplayer{
+    margin-left: 200px;
+    width: 950px;
+    height: 600px;
+    float: left;
+}
+
+#videolist{
+    float: right;
+    margin-right: 100px;
+}
+
+.white{
+    width: 100%;
+    height: 50px;
+}
+
+.white2{
+    width: 100%;
+    height: 10px;
+}
+
+#introduce{
+    margin-left: 200px;
+    width: 60%;
+}

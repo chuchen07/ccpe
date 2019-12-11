@@ -119,11 +119,7 @@ public class CourseController {
         return videoList;
     }
 
-    @RequestMapping("/test")
-    @ResponseBody
-    public List<Video> test(){
-        return videoservice.test();
-    }
+
 
 
 

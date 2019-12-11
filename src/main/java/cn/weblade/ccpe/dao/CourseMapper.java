@@ -27,6 +27,9 @@ public interface CourseMapper {
     @Select("select * from video where video_id=#{videoId}")
     public Video geivideobyId(Integer videoId);
 
+    @Select("select * from video where course_name=#{courseName}")
+    public List<Video> selectvideobyCourse(String courseName);
+
 
 
     //用于视频列表，视频课程查询
