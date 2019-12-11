@@ -4,7 +4,7 @@ spring:
     #m每次使用都要改回来username: root
     #    password: password
     username: root
-    password: mysqlmima
+    password: 19960804
     url: jdbc:mysql://localhost:3306/ccpedb?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT
     driver-class-name: com.mysql.cj.jdbc.Driver
 mybatis:

@@ -117,7 +117,7 @@ $(function() {
                  var email = $("<td></td>").append("<input type='text' style='border: 0px' disabled='ture' value=" + item.email + ">");
                  var userCode = $("<td></td>").append("<input type='text' style='border: 0px' value=" + item.userCode + ">");
                  var userState = $("<td></td>").append("<input type='text' style='border: 0px' value=" + item.userState + ">");
-                 var editBtn = $("<button style='width: 68px;height: 34px'></button>").addClass("btn btn-primary btn-sm")
+                 var editBtn = $("<button style='width: 68px;height: 34px; font-size: 14px'></button>").addClass("btn btn-primary btn-sm")
                      .append($("<span></span>").addClass("glyphicon glyphicon-edit")).append("编辑");
                  var deleBtn = $("<button ></button>").addClass("btn btn-danger ")
                      .append($("<span></span>").addClass("glyphicon glyphicon-trash")).append("删除");
