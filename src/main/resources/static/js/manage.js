@@ -48,7 +48,6 @@ $(function() {
         $(this).addClass("current").siblings().removeClass("current");
         // 2.点击的同时，得到当前li 的索引号
         var index = $(this).index();
-        console.log(index);
         // 3.让下部里面相应索引号的item显示，其余的item隐藏
 
             $(".col-md-10 .item").eq(index).show().siblings().hide();
@@ -70,10 +69,7 @@ $(function() {
         // 2.点击的同时，得到当前li 的索引号
         var index = $(this).index();
 
-        console.log("index");
         // 3.让下部里面相应索引号的item显示，其余的item隐藏
-
-        console.log(index);
         // 3.让下部里面相应索引号的item3显示，其余的item2隐藏
 
         $(".col-md-10 .item2").eq(index).show().siblings().hide();
@@ -84,12 +80,34 @@ $(function() {
 $(function() {
     // 1.点击上部的li，当前li 添加current类，其余兄弟移除类
     $(".col-md-2 li").click(function() {
+            $.ajax({
+                url:"/queryAllPaperName",
+                data:"",
+                type:"post",
+                success:function(result){
+
+                    var str='<tr>';
+                    str+='<th>试题id</th>';
+                    str+='<th>试题名称</th>';
+                    str+='<th>删除</th>';
+                    str+='</tr>';
+
+                    for (var i=0;i<result.length;i++){
+                        console.log(result[i].paperName);
+                        str+='<tr>';
+                        str+='<td><input              type="text"  value='+result[i].paperId+         ' readonly="readonly"/></td>';
+                        str+='<td><input              type="text"  value='+result[i].paperName+         ' readonly="readonly"/></td>';
+                        str+='<td><input type="button" onclick="deleteSubject(&apos;'+i+'&apos;)" style="width: 50px" value="刪除"/></td>';
+                        str+='</tr>';
+                    }
+                    $("#queryAllName").html(str);
+                }
+            })
 
         // 链式编程操作
         $(this).addClass("current3").siblings().removeClass("current3");
         // 2.点击的同时，得到当前li 的索引号
         var index = $(this).index();
-        console.log(index);
         // 3.让下部里面相应索引号的item显示，其余的item隐藏
         $(".col-md-10 .item3").eq(index).show().siblings().hide();
     });
