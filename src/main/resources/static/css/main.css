@@ -4,7 +4,7 @@
 }
 
 body {
-    background: rgba(154, 226, 226, 0.959);
+    background-color: #fbefef;
 }
 
 
@@ -21,6 +21,8 @@ body {
     z-index: 2;
     text-align: center;
 }
+
+
 
 .loading-done {
     display: none;
@@ -70,17 +72,18 @@ div#img nav li:hover {
 
 .pre.after-loading {
     left: -40px;
+
     -webkit-transform: rotate(-45deg);
     transform: rotate(-45deg);
-    border-top: 2px solid #fff;
-    border-left: 2px solid #fff;
+    border-top: 2px solid #898f9a;
+    border-left: 2px solid #898f9a;
 }
 
 .next.after-loading {
     -webkit-transform: rotate(45deg);
     transform: rotate(45deg);
-    border-top: 2px solid #fff;
-    border-right: 2px solid #fff;
+    border-top: 2px solid #898f9a;
+    border-right: 2px solid #898f9a;
     right: -40px;
 }
 

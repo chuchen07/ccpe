@@ -3,6 +3,7 @@ package cn.weblade.ccpe.service;
 import cn.weblade.ccpe.dao.UserMapper;
 import cn.weblade.ccpe.entity.Page;
 import cn.weblade.ccpe.entity.User;
+import cn.weblade.ccpe.entity.rolepermission;
 import cn.weblade.ccpe.utils.MailUtils;
 import org.springframework.stereotype.Service;
 
@@ -92,6 +93,10 @@ public class UserService {
 
     public boolean updateUser(User user){
         return userMapper.updateUser(user);
+    }
+
+    public List<rolepermission> getAllRolePermission(){
+        return userMapper.getAllRolePermission();
     }
 
 }

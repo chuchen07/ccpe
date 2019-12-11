@@ -4,8 +4,8 @@
 }
 
 body {
-
-    background: rgba(154, 226, 226, 0.96);
+    color: rgb(0, 0, 0);
+    background-color: #fbefef;
 }
 
 .title {
@@ -13,7 +13,7 @@ body {
     height: 60px;
     font-size: 36px;
     text-align: center;
-    color: rgb(194, 206, 216);
+    color: rgb(0, 0, 0);
 }
 h3 {
     text-align: center;

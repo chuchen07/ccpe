@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -17,11 +20,7 @@ import java.util.Map;
 @Controller
 public class CourseSerController {
 
-    @RequestMapping("/upload")
-    public ModelAndView upload(){
-        ModelAndView mv=new ModelAndView("/upload");
-        return mv;
-    }
+
 
     @RequestMapping("/ajax")
     public ModelAndView ajax(){
@@ -31,6 +30,11 @@ public class CourseSerController {
     @RequestMapping("/allSubject")
     public ModelAndView querySubject(){
         ModelAndView mv=new ModelAndView("/allSubject.html");
+        return mv;
+    }
+    @RequestMapping("/h5")
+    public ModelAndView h5(){
+        ModelAndView mv=new ModelAndView("/h5");
         return mv;
     }
 
@@ -77,6 +81,7 @@ public class CourseSerController {
         List<Paper>list=courseSerService.selectPaperName();
 //        model.addAttribute("lists",list);
 //        String str="/ajax.html";
+        model.addAttribute("list", list);
         return  list;
 
     }
@@ -146,6 +151,16 @@ public class CourseSerController {
         Map<String,Object> ret=courseSerService.correctWrongSubject(userId,fillBlankAnswer,judgeAnswer,multipleChoiceAnswer);
 
         return  ret;
+    }
+
+
+   //测试播放
+    @RequestMapping("/video")
+    public ModelAndView watchvideo(String courseName){
+        ModelAndView model= new ModelAndView();
+        model.addObject("videoback",courseSerService.selectvideobyCourse(courseName));
+        model.setViewName("watchVideo");
+        return model;
     }
 
 

@@ -4,7 +4,7 @@
 }
 
 body {
-    background: rgba(154, 226, 226, 0.959);
+    background-color: #fbefef;
 }
 
 .nav a::before {

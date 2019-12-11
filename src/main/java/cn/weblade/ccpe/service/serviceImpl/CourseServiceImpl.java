@@ -42,7 +42,7 @@ public class CourseServiceImpl implements CourseService {
     @Transactional
     public String saveSubject(MultipartFile file) throws Exception {
         String fileName=file.getOriginalFilename();
-        String filePath="C:\\Users\\Administrator\\Desktop\\flyChichen";
+        String filePath="C:\\Users\\pc\\Desktop\\flyChicken";
         File subjectFile=new File(filePath+fileName);
 
         String subjectContext=null;
@@ -178,32 +178,43 @@ public class CourseServiceImpl implements CourseService {
     @Override
     @Transactional
     public String deleteSubject(String paperName) {
-        try{
-            String filePath="C:\\Users\\Administrator\\Desktop\\flyChichen\\";
-            File file=new File(filePath+paperName+".docx");
+        try {
+            String filePath = "C:\\Users\\Administrator\\Desktop\\flyChichen\\";
+            File file = new File(filePath + paperName + ".docx");
             file.delete();
-            Integer paperId=courseSerMapper.selectPaperByPaperName(paperName+".docx");
+            Integer paperId = courseSerMapper.selectPaperByPaperName(paperName + ".docx");
 
-            if (paperId!=null||paperId!=0){
+            if (paperId != null || paperId != 0) {
                 fillBlankMapper.FillBlankDelete(paperId);
                 judgeMapper.JudgeDelete(paperId);
                 multipleChoiceMapper.MultipleChoiceDelete(paperId);
                 paperMapper.PaperDelete(paperId);
                 return "删除成功";
-            }else {
+            } else {
                 return "删除失败";
             }
 
-    }catch (Exception e){
+        } catch (Exception e) {
             return "删除失败";
         }
-
-}
+    }
+//    public int deleteSubject(String paperName) {
+//       String filePath="C:\\Users\\pc\\Desktop\\flyChicken\\";
+//       File file=new File(filePath+paperName+".docx");
+//       file.delete();
+//       int paperId=courseSerMapper.selectPaperByPaperName(paperName+".docx");
+//
+//       fillBlankMapper.FillBlankDelete(paperId);
+//       judgeMapper.JudgeDelete(paperId);
+//       multipleChoiceMapper.MultipleChoiceDelete(paperId);
+//       paperMapper.PaperDelete(paperId);
+//       return 0;
+//}
 
     @Override
     public Course subjectBrowse(MultipartFile file) throws Exception{
         String fileName=file.getOriginalFilename();
-        String filePath="C:\\Users\\Administrator\\Desktop\\flyChichen\\cache\\";
+        String filePath="C:\\Users\\pc\\Desktop\\flyChicken\\cache\\";
         File subjectFile=new File(filePath+fileName);
 
         String subjectContext=null;

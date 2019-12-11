@@ -2,6 +2,7 @@ package cn.weblade.ccpe.controller;
 
 import cn.weblade.ccpe.entity.Page;
 import cn.weblade.ccpe.entity.User;
+import cn.weblade.ccpe.entity.rolepermission;
 import cn.weblade.ccpe.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -13,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -96,7 +99,10 @@ public class UserController {
         return userService.updateUser(user);
     }
 
-
-
+    @ResponseBody
+    @GetMapping("/getAllRolePermission")
+    public List<rolepermission> getAllRolePermission(){
+        return userService.getAllRolePermission();
+    }
 
 }

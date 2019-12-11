@@ -32,56 +32,52 @@
                 <!--part1-->
                 <fieldset>
                     <h3>单选题（5分/题）</h3>
-                    <div id="">
-                        <fieldset class="question">
-                            <p >问题</p>
-                            <label><input type="radio" name="answer1" value="6"/>选项1</label>
-                            <br />
-                            <label><input type="radio" name="answer1"  value="0"/>选项2</label>
-                            <br />
-                            <label><input type="radio" name="answer1" value="0"/>选项3</label>
-                        </fieldset>
-
-
-                        <fieldset class="question">
-                            <p >Qeustion 9:夸父出自 </p>
-                            <label id="9"><input type="radio" name="answer9"  value="6"/>《山海经》</label>
-                            <br />
-                            <label><input type="radio" name="answer9"  value="0"/>《搜神记》</label>
-                            <br/>
-                            <label><input type="radio" name="answer9"  value="0"/>《封神演义》</label>
-                        </fieldset>
+                    <div id="radio">
+<!--                        //这里在exam.js获取题目-->
                     </div>
                 </fieldset>
 
                 <fieldset>
-                    <h3>多选题（每题10分， 错选不得分）</h3>
-                    <div id="grey">
-                        <fieldset class="question">
-                            <p >题目1</p>
-                            <input type="checkbox" name="answer10" value="5" /><span id="10">选项1</span>
-                            <br />
-                            <input type="checkbox" name="answer10" value="5" /><span id="10">选项2</span>
-                            <br />
-                            <input type="checkbox" name="answer10" value="5" /><span id="10">选项3</span>
-                            <br />
-                            <input type="checkbox" name="answer10" value="-1" /><span>选项4</span>
-                        </fieldset>
-                        <fieldset class="question">
-                            <p >Qeustion 11: 关于李白正确的描述</p>
-                            <input type="checkbox" name="answer11" value="7" /><span id="11">被誉为“诗仙”</span>
-                            <br />
-                            <input type="checkbox" name="answer11" value="8" /><span id="11">著有《蜀道难》</span>
-                            <br />
-                            <input type="checkbox" name="answer11" value="-1" /><span>号易安居士”</span>
-                            <br />
-                            <input type="checkbox" name="answer11" value="-1" /><span>婉约派诗人</span>
-                        </fieldset>
-
+                    <h3>填空题（5分/题）</h3>
+                    <div id="fill">
+<!--                        //这里在exam.js获取题目-->
                     </div>
                 </fieldset>
-                <button type="button" οnclick="coreCount()">查看成绩</button>
-                <button type="button" οnclick="showWhichWrong()">查看错题</button>
+
+                <fieldset>
+                    <h3>判断题（5分/题）</h3>
+                    <div id="judge">
+<!--                        //这里在exam.js获取题目-->
+                    </div>
+                </fieldset>
+<!--                <fieldset>-->
+<!--                    <h3>多选题（每题10分， 错选不得分）</h3>-->
+<!--                    <div id="grey">-->
+<!--                        <fieldset class="question">-->
+<!--                            <p >题目1</p>-->
+<!--                            <input type="checkbox" name="answer10" value="5" /><span id="10">选项1</span>-->
+<!--                            <br />-->
+<!--                            <input type="checkbox" name="answer10" value="5" /><span id="10">选项2</span>-->
+<!--                            <br />-->
+<!--                            <input type="checkbox" name="answer10" value="5" /><span id="10">选项3</span>-->
+<!--                            <br />-->
+<!--                            <input type="checkbox" name="answer10" value="-1" /><span>选项4</span>-->
+<!--                        </fieldset>-->
+<!--                        <fieldset class="question">-->
+<!--                            <p >Qeustion 11: 关于李白正确的描述</p>-->
+<!--                            <input type="checkbox" name="answer11" value="7" /><span id="11">被誉为“诗仙”</span>-->
+<!--                            <br />-->
+<!--                            <input type="checkbox" name="answer11" value="8" /><span id="11">著有《蜀道难》</span>-->
+<!--                            <br />-->
+<!--                            <input type="checkbox" name="answer11" value="-1" /><span>号易安居士”</span>-->
+<!--                            <br />-->
+<!--                            <input type="checkbox" name="answer11" value="-1" /><span>婉约派诗人</span>-->
+<!--                        </fieldset>-->
+
+<!--                    </div>-->
+<!--                </fieldset>-->
+                <div align="center"><button class="btn btn-primary" type="button" οnclick="coreCount()">查看成绩</button>
+                <button class="btn btn-danger" type="button" οnclick="showWhichWrong()">查看错题</button></div>
             </fieldset>
 
         </form>
@@ -91,6 +87,7 @@
 <!-- //瀑布流插件 -->
 <script src="js/jquery-1.11.0.min.js"></script>
 <script src="js/pinterest_grid.js"></script>
+<script src="js/exam.js"></script>
 </body>
 
 </html>

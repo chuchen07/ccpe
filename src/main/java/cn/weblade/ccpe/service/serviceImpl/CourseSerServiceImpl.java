@@ -25,6 +25,8 @@ public class CourseSerServiceImpl implements CourseSerService {
     private CourseSerMapper courseSerMapper;
     @Autowired
     private  SubjectRecordMapper subjectRecordMapper;
+    @Autowired
+    private CourseMapper courseMapper;
 
     Map<Integer,Object>  map=new HashMap();
 
@@ -285,6 +287,11 @@ public class CourseSerServiceImpl implements CourseSerService {
         ret.put("multipleChoice",bMul);
 
         return ret;
+    }
+
+    @Override
+    public List<Video> selectvideobyCourse(String courseName) {
+        return courseMapper.selectvideobyCourse(courseName);
     }
 }
 
