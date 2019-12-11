@@ -40,10 +40,12 @@ public class CourseServiceImpl implements CourseService {
     * */
     @Override
     @Transactional
-    public String saveSubject(MultipartFile file) throws Exception {
-        String fileName=file.getOriginalFilename();
-        String filePath="C:\\Users\\pc\\Desktop\\flyChicken";
+    public String saveSubject(String fileName) throws Exception {
+//        String fileName=file.getOriginalFilename();
+        String filePath="C:\\Users\\Administrator\\Desktop\\健康教育\\";
+        String cachePath="C:\\Users\\Administrator\\Desktop\\健康教育\\cache\\";
         File subjectFile=new File(filePath+fileName);
+        File cacheFile=new File(cachePath+fileName);
 
         String subjectContext=null;
         int chooseType=0;
@@ -55,7 +57,7 @@ public class CourseServiceImpl implements CourseService {
 
         /*判断文件是否存在*/
         if (!subjectFile.exists()){
-            file.transferTo(subjectFile);
+            cacheFile.renameTo(subjectFile);
         }else {
             return "文件已存在，请先删除文件再上传";
         }
@@ -179,10 +181,10 @@ public class CourseServiceImpl implements CourseService {
     @Transactional
     public String deleteSubject(String paperName) {
         try {
-            String filePath = "C:\\Users\\Administrator\\Desktop\\flyChichen\\";
-            File file = new File(filePath + paperName + ".docx");
+            String filePath = "C:\\Users\\Administrator\\Desktop\\健康教育\\";
+            File file = new File(filePath + paperName);
             file.delete();
-            Integer paperId = courseSerMapper.selectPaperByPaperName(paperName + ".docx");
+            Integer paperId = courseSerMapper.selectPaperByPaperName(paperName);
 
             if (paperId != null || paperId != 0) {
                 fillBlankMapper.FillBlankDelete(paperId);
@@ -212,9 +214,9 @@ public class CourseServiceImpl implements CourseService {
 //}
 
     @Override
-    public Course subjectBrowse(MultipartFile file) throws Exception{
-        String fileName=file.getOriginalFilename();
-        String filePath="C:\\Users\\pc\\Desktop\\flyChicken\\cache\\";
+    public Course subjectBrowse(String fileName) throws Exception{
+//        String fileName=file.getOriginalFilename();
+        String filePath="C:\\Users\\Administrator\\Desktop\\健康教育\\cache\\";
         File subjectFile=new File(filePath+fileName);
 
         String subjectContext=null;
@@ -228,8 +230,6 @@ public class CourseServiceImpl implements CourseService {
         Judge judge=new Judge();
         FillBlank fillBlank=new FillBlank();
 
-        /*保存*/
-        file.transferTo(subjectFile);
 
         /*实例化三个list*/
         List<MultipleChoice>multipleChoiceList=new ArrayList<>();
@@ -343,6 +343,18 @@ public class CourseServiceImpl implements CourseService {
         course.setJudgeList(judgeList);
 
         return course;
+    }
+
+    @Override
+    @Transactional
+    public String subjectBrowseUpload(MultipartFile file) throws Exception {
+        String fileName=file.getOriginalFilename();
+        String filePath="C:\\Users\\Administrator\\Desktop\\健康教育\\cache\\";
+        File subjectFile=new File(filePath+fileName);
+
+        /*保存*/
+        file.transferTo(subjectFile);
+        return "success";
     }
 
 }

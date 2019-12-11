@@ -4,5 +4,10 @@
 }
 
 body {
-    background-color: #fbefef;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-image: url(/img/lighten4.jpg);
+    background-size: cover;
+    z-index: -1;
 }

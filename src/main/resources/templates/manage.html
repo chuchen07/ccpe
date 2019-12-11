@@ -75,7 +75,12 @@
                             <h1>用户信息管理
                                 </h1>
                         </div>
+                        <div>
+                            <input style="width: 200px;float:left;" type="text" placeholder="请输入查询内容" class="form-control" id="" />
 
+
+                        <input type="button"  class="btn btn-primary" value="查询">
+                        </div>
                         <table class="table table-striped" id="users_table">
 
                             <thead>
@@ -240,16 +245,7 @@
                         <table class=" table table-striped" id="test_table">
 
                             <thead id="queryAllName">
-                            <tr>
-                                <th>试题名称</th>
 
-                                <th>删除</th>
-                            </tr>
-
-                            <tr th:each="list : ${list}">
-                                <th th:text="${list.getPaperId()}"></th>
-                                <th th:text="${list.getPaperName()}"></th>
-                            </tr>
                             </thead>
                             <tbody id="nr">
 
@@ -267,8 +263,9 @@
                             </fieldset>
 
                             <div class="layui-upload">
-                                <button type="button" class="layui-btn layui-btn-normal" id="testList">选择多文件</button>
+                                <button type="button" class="layui-btn layui-btn-normal" id="chooseSubjectFile">选择题库</button>
                                 <div class="layui-upload-list">
+
                                     <table class="layui-table">
                                         <thead>
                                         <tr>
@@ -278,10 +275,10 @@
                                             <th>操作</th>
                                         </tr>
                                         </thead>
-                                        <tbody id="demoList"></tbody>
+                                        <tbody id="subjectList"></tbody>
                                     </table>
                                 </div>
-                                <button type="button" class="layui-btn" id="testListAction">开始上传</button>
+                                <button type="button" class="layui-btn" id="startUpload">确认放入题库</button>
                             </div>
 
                         </div>
@@ -301,6 +298,7 @@
 <script src="js/pinterest_grid.js"></script>
 <script src="layui/layui.js"></script>
 <script src="js/manage.js"></script>
+<script src="js/subject.js"></script>
 <script src="js/role.js"></script>
 <script src="js/video.js"></script>
 <script src="js/myAjax.js"></script>
@@ -374,6 +372,72 @@
                 }
             });
     });
+
+
+    var fileName;
+    /*题库上传*/
+    layui.use('upload', function(){
+        var upload = layui.upload;
+
+
+        //执行实例
+        var uploadInst = upload.render({
+            elem: '#chooseSubjectFile' //绑定元素
+            ,url: '/subjectBrowseUpload' //上传接口
+            ,accept: 'file'
+            ,choose: function(obj) {
+                $("#chooseSubjectFile").hide();
+                var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+
+                //读取本地文件
+                obj.preview(function(index, file, result) {
+                    var tr = $(['<tr id="upload-' + index + '">', '<td>' + file.name + '</td>', '<td>' + (file.size / 1014).toFixed(1) + 'kb</td>', '<td>', '<button class="layui-btn layui-btn-xs demo-delete">删除</button>', '<button class="layui-btn layui-btn-xs layui-btn-danger subjectBrowse">预览</button>', '</td>'].join(''));
+                    fileName=file.name;
+                    //删除
+                    tr.find('.demo-delete').on('click', function() {
+                        delete files[index]; //删除对应的文件
+                        tr.remove();
+                        $("#chooseSubjectFile").show();
+                    });
+
+                    /*预览*/
+                    tr.find('.subjectBrowse').on('click', function() {
+                        window.open("/subjectBrowsePage?fileName="+fileName);
+                    });
+
+                    $("#subjectList").append(tr);
+                });
+                }
+            ,done: function(res){
+
+            }
+            ,error: function(){
+                //请求异常回调
+            }
+        });
+    });
+
+    $("#startUpload").click("click",function() {
+        if (fileName==null&&fileName==""){
+            alert("请选择文件")
+        }else {
+            $.ajax({
+                type: "post",
+                url: "/saveSubject",
+                data:{'fileName':fileName},
+                dataType: "json", //返回数据类型
+                success: function(data){
+
+                    alert(data.ret);
+                    window.location.reload();
+                }
+            });
+        }
+    })
+
+    // $(".subjectBrowse").click(function (){
+    //     window.location.href="/subjectBrowsePage?fileName="+fileName;
+    // })
 
 
 </script>

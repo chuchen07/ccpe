@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd" >
+<head>
+    <meta charset="UTF-8">
+    <title>subject_ajax</title>
+
+</head>
+<body onload="subjectBrowse()">
+
+<div id="subjectBrowse">
+
+</div>
+  </body>
+
+<script src="js/jquery.js"></script>
+<script>
+    function subjectBrowse(){
+        var url=window.location.search;
+        var fileName=url.split("=");
+        fileName[1]=decodeURI(fileName[1]);
+        console.log(fileName[1]);
+        $.ajax({
+            type: "post",
+            url: "/subjectBrowse",
+            data:{"fileName":fileName[1]},
+            dataType: "json", //返回数据类型
+            success: function(data){
+                /*选择题*/
+                var str="";
+                str += '<fieldset>';
+                str +='<h3>单选题（5分/题）</h3>';
+                str +='<div>';
+                str += '<fieldset id="multipleChoice">';
+                for(var i=0;i<data.multipleChoiceList.length;i++) {
+                    var list = data.multipleChoiceList[i];
+                    list.context=list.context.replace(/</g,"&lt;");
+                    str +='<div id="multipleChoice'+i+'">';
+                    str += '<span style="white-space: pre-line;font-size: larger">'+(i+1)+'. '+list.context+'</span><br/><br/>';
+                    console.log(list.context);
+                    str += ' <label><input type="radio" value="A" name="multipleChoiceAnswer'+i+'"/>'+'A. '+list.answer1+'</label><br/>';
+                    str += ' <label><input type="radio" value="B" name="multipleChoiceAnswer'+i+'"/>'+'B. '+list.answer2+'</label><br/>';
+                    str += ' <label><input type="radio" value="C" name="multipleChoiceAnswer'+i+'"/>'+'C. '+list.answer3+'</label><br/>';
+                    str += ' <label><input type="radio" value="D" name="multipleChoiceAnswer'+i+'"/>'+'D. '+list.answer4+'</label><br/><br/>';
+                    str +='</div>';
+                }
+                str += '</fieldset>';
+                str += '</div>';
+                str += '</fieldset>';
+
+
+                /*判断题*/
+                str += '<fieldset>';
+                str +='<h3>判断题（5分/题）</h3>';
+                str +='<div>';
+                str += '<fieldset id="judge">';
+                for(var i=0;i<data.judgeList.length;i++) {
+                    var list = data.judgeList[i];
+                    str +='<div id="judge'+i+'">';
+                    str += '<p style="font-size: larger">'+(i+1)+'. '+list.context+'</p>';
+                    str += ' <label><input type="radio" value="对" name="answer'+i+'"/>'+'对'+'<br/>';
+                    str += ' <label><input type="radio" value="错" name="answer'+i+'"/>'+'错'+'</label><br/>';
+                    str +='</div>';
+                }
+                str += '</fieldset>';
+                str += '</div>';
+                str += '</fieldset>';
+
+
+                /*填空题*/
+                str += '<fieldset>';
+                str +='<h3>填空题（5分/题）</h3>';
+                str +='<div>';
+                str += '<fieldset id="fillBlank">';
+                for(var i=0;i<data.fillBlankList.length;i++) {
+                    var list = data.fillBlankList[i];
+                    str +='<div>';
+                    list.context=list.context.replace(/_______/g,"<label><input type='text' style='border-bottom: 1px solid;border-left: 0px;border-right: 0px;border-top: 0px' /></label>");
+                    str += '<p  id="fillBlank'+i+'">'+(i+1)+'. '+list.context+'</p>';
+                    str +='</div>';
+                }
+                str += '</fieldset>';
+                str += '</div>';
+                str += '</fieldset>';
+                $("#subjectBrowse").html(str);
+            },
+            error:function (data){
+            }
+        });
+    }
+</script>
+<script type="text/javascript" th:src="@{webjars/jquery/jquery.js}"></script>
+</html>
+
+<!--map.put("fillBlank",fillBlankAnswerList);-->
+<!--map.put("judge",bJud);-->
+<!--map.put("multipleChoice",bMul);-->

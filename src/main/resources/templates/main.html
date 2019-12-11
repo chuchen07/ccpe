@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 
 <head>
     <meta charset="UTF-8">
@@ -31,19 +32,21 @@
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="#">首页 <span class="sr-only">(current)</span></a></li>
                         <li><a th:href="@{/course}">课程</a></li>
-                        <li><a th:href="@{/answer}">答题</a></li>
+                        <li><a th:href="@{/allSubject}">答题</a></li>
 
                     </ul>
                     <form class="navbar-form navbar-left">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="请输入搜索的课程名称">
                         </div>
-                        <button type="submit" class="btn btn-default glyphicon glyphicon-search">搜索</button>
+                        <button type="submit" class="btn btn btn-primary btn-default glyphicon glyphicon-search">搜索</button>
                     </form>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/loginPage">登录</a></li>
+
+                        <li shiro:hasPermission="deleteOrder"><a href="/logout">退出</a></li>
+                        <li shiro:guest=""><a href="/loginPage">登录</a></li>
                         <li><a href="/registerPage">注册</a></li>
-                        <li><a href="#" class="glyphicon glyphicon-user">个人中心</a></li>
+                        <li><a th:value="'用户名：'+${username}+','+'邮箱是:'+${email}" class="good glyphicon glyphicon-user">个人中心</a></li>
 
                     </ul>
                 </div>
@@ -70,13 +73,13 @@
                                 <a href="" class="glyphicon glyphicon-th-list">课程分类</a>
                             </li>
                             <li>
-                                <a href="" class="glyphicon glyphicon-eye-open">初级课程</a>
+                                <a href="/video?courseName=初级" class="glyphicon glyphicon-eye-open">初级课程</a>
                             </li>
                             <li>
-                                <a href="" class="glyphicon glyphicon-eye-open">进阶课程</a>
+                                <a href="/video?courseName=中级" class="glyphicon glyphicon-eye-open">中级课程</a>
                             </li>
                             <li>
-                                <a href="" class="glyphicon glyphicon-eye-open">高级课程</a>
+                                <a href="/video?courseName=高级" class="glyphicon glyphicon-eye-open">高级课程</a>
                             </li>
                             <li>
                                 <a href="" class="glyphicon glyphicon-yen">会员课程</a>
@@ -92,15 +95,15 @@
                         <p id="loading">loading...</p>
                         <div id="img">
                             <div class="lighten">
-                                <img src="img/lighten1.jpg" alt="" />
-                                <img src="img/lighten2.jpg" alt="" />
-                                <img src="img/lighten3.jpg" alt="" />
+                                <img src="img/lighten1.jpg" href="/video?courseName=初级" alt="" />
+                                <img src="img/lighten2.jpg" href="/video?courseName=中级" alt="" />
+                                <img src="img/lighten3.jpg" href="/video?courseName=高级" alt="" />
                                 <img src="img/lighten4.jpg" alt="" />
                             </div>
                             <div class="normal">
-                                <img src="img/normal1.jpg" alt="" />
-                                <img src="img/normal2.jpg" alt="" />
-                                <img src="img/normal3.jpg" alt="" />
+                                <img src="img/normal1.jpg" href="/video?courseName=初级" alt="" />
+                                <img src="img/normal2.jpg" href="/video?courseName=中级" alt="" />
+                                <img src="img/normal3.jpg" href="/video?courseName=高级" alt="" />
                                 <img src="img/normal4.jpg" alt="" />
                                 <div class="carousel-caption">
                                     <h3>视频名称</h3>
@@ -126,77 +129,77 @@
 
         <section id="gallery-wrapper">
             <article class="white-panel">
-                <img src="img/1.jpg" class="thumb">
-                <h1><a href="#">Title 1</a></h1>
+                <a href="/video?courseName=初级"><img src="img/1.jpg" class="thumb" ></a>
+                <h1><a href="/video?courseName=初级">Title 1</a></h1>
                 <p>Description 1</p>
             </article>
             <article class="white-panel">
-                <img src="img/2.jpg" class="thumb">
+                <a href="/video?courseName=初级"><img src="img/2.jpg" class="thumb"></a>
                 <h1><a href="#">Title 2</a></h1>
                 <p>Description 2</p>
             </article>
             <article class="white-panel">
-                <img src="img/3.jpg" class="thumb">
+                <a href="/video?courseName=初级"><img src="img/3.jpg" class="thumb"></a>
                 <h1><a href="#">Title 3</a></h1>
                 <p>Description 3</p>
             </article>
             <article class="white-panel">
-                <img src="img/4.jpg" class="thumb">
+                <a href="/video?courseName=初级"><img src="img/4.jpg" class="thumb"></a>
                 <h1><a href="#">Title 4</a></h1>
                 <p>Description 4</p>
             </article>
             <article class="white-panel">
-                <img src="img/5.jpg" class="thumb">
+                <a href="/video?courseName=中级"><img src="img/5.jpg" class="thumb"></a>
                 <h1><a href="#">Title 5</a></h1>
                 <p>Description 5</p>
             </article>
             <article class="white-panel">
-                <img src="img/6.jpg" class="thumb">
+                <a href="/video?courseName=中级"><img src="img/6.jpg" class="thumb"></a>
                 <h1><a href="#">Title 6</a></h1>
                 <p>Description 6</p>
             </article>
             <article class="white-panel">
-                <img src="img/7.jpg" class="thumb">
+                <a href="/video?courseName=中级"><img src="img/7.jpg" class="thumb"></a>
                 <h1><a href="#">Title 7</a></h1>
                 <p>Description 7</p>
             </article>
             <article class="white-panel">
-                <img src="img/8.jpg" class="thumb">
+                <a href="/video?courseName=中级"><img src="img/8.jpg" class="thumb"></a>
                 <h1><a href="#">Title 8</a></h1>
                 <p>Description 8</p>
             </article>
             <article class="white-panel">
-                <img src="img/9.jpg" class="thumb">
+                <a href="/video?courseName=高级"><img src="img/9.jpg" class="thumb"></a>
                 <h1><a href="#">Title 9</a></h1>
                 <p>Description 9</p>
             </article>
             <article class="white-panel">
-                <img src="img/10.jpg" class="thumb">
+                <a href="/video?courseName=高级"><img src="img/10.jpg" class="thumb"></a>
                 <h1><a href="#">Title 10</a></h1>
                 <p>Description 10</p>
             </article>
             <article class="white-panel">
-                <img src="img/11.jpg" class="thumb">
+                <a href="/video?courseName=高级"><img src="img/11.jpg" class="thumb"></a>
                 <h1><a href="#">Title 11</a></h1>
                 <p>Description 11</p>
             </article>
             <article class="white-panel">
-                <img src="img/12.jpg" class="thumb">
+                <a href="/video?courseName=高级"><img src="img/12.jpg" class="thumb"></a>
                 <h1><a href="#">Title 12</a></h1>
                 <p>Description 12</p>
             </article>
             <article class="white-panel">
-                <img src="img/13.jpg" class="thumb">
+                <a href="/video?courseName=高级"><img src="img/13.jpg" class="thumb"></a>
                 <h1><a href="#">Title 13</a></h1>
                 <p>Description 13</p>
             </article>
             <article class="white-panel">
-                <img src="img/14.jpg" class="thumb">
+                <a href="/video?courseName=高级"><img src="img/14.jpg" class="thumb"></a>
                 <h1><a href="#">Title 14</a></h1>
                 <p>Description 14</p>
             </article>
             <article class="white-panel">
-                <img src="img/15.jpg" class="thumb">
+                <a href="/video?courseName=高级"><img src="img/15.jpg" class="thumb"></a>
                 <h1><a href="#">Title 15</a></h1>
                 <p>Description 15</p>
             </article>
@@ -209,6 +212,13 @@
     <script src="js/jquery-1.11.0.min.js"></script>
     <script src="js/pinterest_grid.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        $('.good').click(function(){
+            var data = $('.good').attr("value");
+            confirm(data);
+        })
+
+    </script>
 </body>
 
 </html>

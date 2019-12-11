@@ -52,6 +52,11 @@ public class UserController {
         if(subject.hasRole("管理员")){
             return "manage.html";
         }else if(subject.hasRole("普通用户")){
+            List<User> users=userService.findUserByEmail(email);
+            User user = users.get(0);
+            String username =  user.getUserName();
+            model.addAttribute("username",username);
+            model.addAttribute("email",email);
             return "main.html";
         }
         return "unauthorize_Page.html";

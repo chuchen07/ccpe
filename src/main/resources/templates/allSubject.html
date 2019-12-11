@@ -3,15 +3,62 @@
       xmlns:th="http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd" >
 <head>
     <meta charset="UTF-8">
-    <title>subject_ajax</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="js/jquery.js"></script>
+    <!-- bootstrap插件 -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/jquery.min.js"></script>
+    <!-- 瀑布流插件 -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/default.css">
+    <link rel="stylesheet" href="css/answer.css">
+<title>subject_ajax</title>
 </head>
 <body onload="allSubject()">
+<div class="container">
+    <!-- 导航条 -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="/main" class="glyphicon glyphicon-chevron-left">返回</a></li>
+                    <li><a href="#">欢迎来到答题界面</a></li>
+
+                </ul>
+                <form class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="请输入搜索的题卷">
+                    </div>
+                    <button type="submit" class="btn btn btn-primary btn-default glyphicon glyphicon-search">搜索</button>
+                    <button type="submit" class="btn btn btn-danger btn-default glyphicon glyphicon-exclamation-sign">错题集</button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/loginPage">登录</a></li>
+                    <li><a href="/registerPage">注册</a></li>
+                    <li><a href="#" class="glyphicon glyphicon-user">个人中心</a></li>
+
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <div class="title">
+        请在下面答卷列表选择答题
+    </div>
+<div id="list">
 <table id="queryAllPaperName">
     <tr >
-        <th>试题名称</th>
+        <th>答卷名称</th>
         <th>题目</th>
     </tr>
 </table>
+</div>
+</div>
 </body>
 
 <script src="js/jquery.js"></script>
@@ -26,9 +73,9 @@
                 for(var i=0;i<data.length;i++) {
                     var list = data[i];
                     str += '<tr>';
-                    str += '<td><input name="paperId"             type="text"  value=' + list.paperId + ' readonly="readonly"/></td>';
-                    str += '<td><input name="paperName"                type="text"  value=' + list.paperName + ' readonly="readonly"/></td>';
-                    str += '<td><input type="button" href="answerSubject.html" onclick="answerButton(&apos;'+list.paperId+'&apos;)" value="答题" /></td>';
+                    str += '<td style="color: #0f0f0f;width: 300px "><input style="border: 0px" name="paperId" type="text"  value=' + list.paperId + ' readonly="readonly"/></td>';
+                    str += '<td style="color: #0f0f0f;width: 300px "><input name="paperName" style="border: 0px" type="text"  value=' + list.paperName + ' readonly="readonly"/></td>';
+                    str += '<td style="color: #0f0f0f;width: 300px "><input style="width: 100px" class="btn btn-primary" type="button" href="answerSubject.html" onclick="answerButton(&apos;'+list.paperId+'&apos;)" value="开始答题" /></td>';
                     str += '</tr>';
                 }
                 $("#queryAllPaperName").html(str);

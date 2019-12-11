@@ -55,6 +55,7 @@ public class ShiroConfig {
 
 
         filterMap.put("/*","anon");
+        filterMap.put("/logout","logout");
  /*       filterMap.put("/updateUser","anon");
         filterMap.put("/deleteUser","anon");
 
@@ -82,7 +83,7 @@ public class ShiroConfig {
         filterMap.put("/register","anon");
         filterMap.put("/registerCheck","anon");
         filterMap.put("/static/*","anon");
-        filterMap.put("/logout","logout");
+
         filterMap.put("/subjectBrowse","anon");
         filterMap.put("/upload","anon");
         filterMap.put("/exam","anon");
