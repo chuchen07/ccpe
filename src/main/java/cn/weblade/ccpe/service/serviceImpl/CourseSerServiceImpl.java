@@ -35,9 +35,9 @@ public class CourseSerServiceImpl implements CourseSerService {
 
     /*查询*/
     @Override
-    public Course querySubject(String paperName){
+    public Course querySubject(Integer paperId){
         Course course=new Course();
-        int paperId=courseSerMapper.selectByPaperName(paperName);
+        System.out.println(paperId);
         course.setMultipleChoiceList(multipleChoiceMapper.selectMulByPaperId(paperId));
         course.setFillBlankList(fillBlankMapper.selectFilByPaperId(paperId));
         course.setJudgeList(judgeMapper.selectJudByPaperId(paperId));
@@ -82,6 +82,7 @@ public class CourseSerServiceImpl implements CourseSerService {
     @Override
     public Map<String,Object> correctPaper(Integer paperId,Integer userId,String[] fillBlank, String[]judge, String[]multipleChoice){
         Map<String,Object>map=new HashMap();
+        List<Boolean[]> fillBlankAnswerList=new ArrayList<>();
 
         /*获取答案*/
         List<MultipleChoice>listMul=multipleChoiceMapper.queryMultipleChoiceAnswerTrue(paperId);
@@ -91,28 +92,51 @@ public class CourseSerServiceImpl implements CourseSerService {
         /*初始化对比结果，true为答对，false为答错*/
         Boolean[]bMul=new Boolean[listMul.size()];
         Boolean[]bJud=new Boolean[listJud.size()];
-        Boolean[]bFil=new Boolean[listFil.size()];
+
 
         /*填空题打分并更新错题集*/
         for (int i=0;i<listFil.size();i++){
-            bFil[i]=listFil.get(i).getAnswer().equals(fillBlank[i]);
-            if (bFil[i]==false){
-                if (subjectRecordMapper.isFilExist(userId,listFil.get(i).getFillBlankId())==null){
-                    subjectRecordMapper.recordSubject(userId,listFil.get(i).getFillBlankId(),null,null,fillBlank[i]);
-                }
+
+            /*处理前端和数据库填空题答案*/
+            String[]strTrueAnswer=listFil.get(i).getAnswer().split(" ");
+            String[]strAnSwer=fillBlank[i].split(" ",strTrueAnswer.length);
+            /*初始化对比结果，true为答对，false为答错*/
+            Boolean[]bFil=new Boolean[strTrueAnswer.length];
+            /*比较答案*/
+            for (int j=0;j<strTrueAnswer.length;j++){
+                bFil[j]=strTrueAnswer[j].equals(strAnSwer[j].trim());
+
+                if (bFil[j]==false){
+                    if (subjectRecordMapper.isFilExist(userId,listFil.get(i).getFillBlankId())==null){
+                        subjectRecordMapper.recordSubject(userId,listFil.get(i).getFillBlankId(),null,null,fillBlank[i]);
+                    }else {}
+                }else{}
             }
+            fillBlankAnswerList.add(bFil);
         }
+
+
         /*判断题打分并更新错题集*/
+        if (judge!=null){
         for (int i=0;i<listJud.size();i++){
             bJud[i]=listJud.get(i).getAnswer().equals(judge[i]);
             if (bJud[i]==false){
-                if (subjectRecordMapper.isMulExist(userId,listMul.get(i).getMultipleChoiceId())==null){
+                if (subjectRecordMapper.isJudExist(userId,listJud.get(i).getJudgeId())==null){
                     subjectRecordMapper.recordSubject(userId,null,listJud.get(i).getJudgeId(),null,judge[i]);
+                }
+            }
+        }}else {
+            for (int i=0;i<listJud.size();i++){
+                /*用户答案为null，全部判为false*/
+                bJud[i]=false;
+                if (subjectRecordMapper.isJudExist(userId,listJud.get(i).getJudgeId())==null){
+                    subjectRecordMapper.recordSubject(userId,null,listJud.get(i).getJudgeId(),null,"");
                 }
             }
         }
 
         /*选择题打分并更新错题集*/
+        if (multipleChoice!=null){
         for (int i=0;i<listMul.size();i++){
             bMul[i]=listMul.get(i).getAnswerTrue().equals(multipleChoice[i]);
             if (bMul[i]==false){
@@ -120,17 +144,25 @@ public class CourseSerServiceImpl implements CourseSerService {
                     subjectRecordMapper.recordSubject(userId,null,null,listMul.get(i).getMultipleChoiceId(),multipleChoice[i]);
                 }
             }
+        }}else {
+            for (int i=0;i<listMul.size();i++){
+                /*用户答案为null，全部判为false*/
+                bMul[i]=false;
+                if (subjectRecordMapper.isMulExist(userId,listMul.get(i).getMultipleChoiceId())==null){
+                    subjectRecordMapper.recordSubject(userId,null,null,listMul.get(i).getMultipleChoiceId(),"");
+                }
+            }
         }
 
-        map.put("fillBlank",bFil);
+        map.put("fillBlank",fillBlankAnswerList);
         map.put("judge",bJud);
         map.put("multipleChoice",bMul);
+
         return map;
     }
 
     @Override
     public Course queryAllRecordSubject(Integer userId) {
-        userId=1;
         Course course=new Course();
 
         /*查找全部错题的id*/
@@ -164,7 +196,7 @@ public class CourseSerServiceImpl implements CourseSerService {
     @Transactional
     public Map<String,Object> correctWrongSubject(Integer userId, String[] fillBlank, String[] judge, String[] multipleChoice) {
         Course course=(Course) map.get(userId);
-
+        List<Boolean[]> fillBlankAnswerList=new ArrayList<>();
         /*获取答案*/
         List<MultipleChoice>listMul=course.getMultipleChoiceList();
         List<Judge>listJud=course.getJudgeList();
@@ -173,31 +205,82 @@ public class CourseSerServiceImpl implements CourseSerService {
         /*初始化对比结果，true为答对，false为答错*/
         Boolean[]bMul=new Boolean[listMul.size()];
         Boolean[]bJud=new Boolean[listJud.size()];
-        Boolean[]bFil=new Boolean[listFil.size()];
 
         /*填空题打分并更新错题集*/
         for (int i=0;i<listFil.size();i++){
-            bFil[i]=listFil.get(i).getAnswer().equals(fillBlank[i]);
-            if (bFil[i]==true){
-                    subjectRecordMapper.filOutOfRecord(userId,listFil.get(i).getFillBlankId());
+
+            /*处理前端和数据库填空题答案*/
+            String[]strTrueAnswer=listFil.get(i).getAnswer().split(" ");
+            String[]strAnSwer=fillBlank[i].split(" ",strTrueAnswer.length);
+            /*初始化对比结果，true为答对，false为答错*/
+            Boolean[]bFil=new Boolean[strTrueAnswer.length];
+            /*比较答案*/
+            boolean b=false;
+            for (int j=0;j<strTrueAnswer.length;j++){
+                bFil[j]=strTrueAnswer[j].equals(strAnSwer[j].trim());
+                b=(bFil[j]&&b);
             }
+            if (b==true){
+                /*移出错题集*/
+                    subjectRecordMapper.filOutOfRecord(userId,listFil.get(i).getFillBlankId());
+            }else
+            fillBlankAnswerList.add(bFil);
         }
+
+
         /*判断题打分并更新错题集*/
-        for (int i=0;i<listJud.size();i++){
-            bJud[i]=listJud.get(i).getAnswer().equals(judge[i]);
+        if (judge!=null){
+            for (int i=0;i<listJud.size();i++){
+                bJud[i]=listJud.get(i).getAnswer().equals(judge[i]);
             if (bJud[i]==true){
+                /*移出错题集*/
                 subjectRecordMapper.judOutOfRecord(userId,listJud.get(i).getJudgeId());
             }
-        }
-        /*选择题打分并更新错题集*/
-        for (int i=0;i<listMul.size();i++){
-            bMul[i]=listMul.get(i).getAnswerTrue().equals(multipleChoice[i]);
-            if (bMul[i]==true){
-                subjectRecordMapper.mulOutOfRecord(userId,listMul.get(i).getMultipleChoiceId());
+            }}else {
+            for (int i=0;i<listJud.size();i++){
+                /*用户答案为null，全部判为false*/
+                bJud[i]=false;
             }
         }
+
+        /*选择题打分并更新错题集*/
+        if (multipleChoice!=null){
+            for (int i=0;i<listMul.size();i++){
+                bMul[i]=listMul.get(i).getAnswerTrue().equals(multipleChoice[i]);
+            if (bMul[i]==true){
+                /*移出错题集*/
+                subjectRecordMapper.mulOutOfRecord(userId,listMul.get(i).getMultipleChoiceId());
+            }
+            }}else {
+            for (int i=0;i<listMul.size();i++){
+                /*用户答案为null，全部判为false*/
+                bMul[i]=false;
+            }
+        }
+
+//        /*填空题打分并更新错题集*/
+//        for (int i=0;i<listFil.size();i++){
+//            bFil[i]=listFil.get(i).getAnswer().equals(fillBlank[i]);
+//            if (bFil[i]==true){
+//                    subjectRecordMapper.filOutOfRecord(userId,listFil.get(i).getFillBlankId());
+//            }
+//        }
+//        /*判断题打分并更新错题集*/
+//        for (int i=0;i<listJud.size();i++){
+//            bJud[i]=listJud.get(i).getAnswer().equals(judge[i]);
+//            if (bJud[i]==true){
+//                subjectRecordMapper.judOutOfRecord(userId,listJud.get(i).getJudgeId());
+//            }
+//        }
+//        /*选择题打分并更新错题集*/
+//        for (int i=0;i<listMul.size();i++){
+//            bMul[i]=listMul.get(i).getAnswerTrue().equals(multipleChoice[i]);
+//            if (bMul[i]==true){
+//                subjectRecordMapper.mulOutOfRecord(userId,listMul.get(i).getMultipleChoiceId());
+//            }
+//        }
         Map<String,Object>ret=new HashMap<>();
-        ret.put("fillBlank",bFil);
+        ret.put("fillBlank",fillBlankAnswerList);
         ret.put("judge",bJud);
         ret.put("multipleChoice",bMul);
 

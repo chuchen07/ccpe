@@ -37,6 +37,7 @@
 //
 //        //TODO
 //        // 待删deleteUser
+//        filterMap.put("/*","anon");
 //        filterMap.put("/updateUser","anon");
 //       // filterMap.put("/deleteUser","anon");
 //        filterMap.put("/exam","anon");

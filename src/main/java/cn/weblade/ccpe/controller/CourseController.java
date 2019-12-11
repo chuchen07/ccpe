@@ -3,17 +3,21 @@ package cn.weblade.ccpe.controller;
 import cn.weblade.ccpe.entity.Course;
 import cn.weblade.ccpe.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-@RestController
+@Controller
 public class CourseController {
     @Autowired
     private CourseService courseService;
 
     /*添加题*/
     @RequestMapping("/saveSubject")
+    @ResponseBody
     public String subjectAdd(MultipartFile file) throws Exception {
 
         String ret=courseService.saveSubject(file);
@@ -22,10 +26,11 @@ public class CourseController {
 
     /*删除题*/
     @RequestMapping("/deleteSubject")
-    public int subjectDelete(String paperName){
+    @ResponseBody
+    public String subjectDelete(@RequestParam("paperName")String paperName){
 
-        courseService.deleteSubject(paperName);
-        return 0;
+        String ret=courseService.deleteSubject(paperName);
+        return ret;
     }
 
 

@@ -16,6 +16,8 @@ public class FillBlank {
      */
     private String answer;
 
+    private String[] fillBlankList;
+
     /**
      * 来源试卷id
      */
@@ -97,6 +99,14 @@ public class FillBlank {
      */
     public void setContext(String context) {
         this.context = context;
+    }
+
+    public String[] getFillBlankList() {
+        return fillBlankList;
+    }
+
+    public void setFillBlankList(String[] fillBlankList) {
+        this.fillBlankList = fillBlankList;
     }
 
     @Override
