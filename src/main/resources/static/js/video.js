@@ -54,7 +54,7 @@ function Data() {
     })
 }*/
 
-function showvideolist(start,size) {
+function showvideolist(start,size,courseName,videoName) {
     $("#video_table tbody").empty();
     $.ajax({
             url: "/queryVideoByCourseAndName",
@@ -62,6 +62,8 @@ function showvideolist(start,size) {
             data:{
                 start: start,
                 size: size,
+                courseName: courseName,
+                videoName: videoName
             },
         success:function (videolist) {
             $.each(videolist,function (index,video) {
@@ -125,5 +127,59 @@ layui.use(['laypage','layer'],function () {
     );
     
 });
+
+function firstquery(value) {
+    console.log(value);
+    showvideolist(0,5,value)
+    $('pagen').empty();
+    layui.use(['laypage','layer'],function () {
+        var laypage = layui.laypage, layer = layui.layer;
+        laypage.render(
+            {
+                elem: 'pagen',
+                count: 50,
+                theme: '#FF5722',
+                limit: 5,
+                curr: 1,
+                prev: '上一页',
+                next: '下一页',
+                jump: function (obj,first) {
+                    if(!first){
+                        showvideolist(obj.curr*obj.limit - obj.limit,obj.limit,value);
+                    }
+
+                }
+            }
+        );
+
+    });
+}
+
+function secondquery(value) {
+    console.log(value);
+    showvideolist(0,5,null,value)
+    $('pagen').empty();
+    layui.use(['laypage','layer'],function () {
+        var laypage = layui.laypage, layer = layui.layer;
+        laypage.render(
+            {
+                elem: 'pagen',
+                count: 50,
+                theme: '#FF5722',
+                limit: 5,
+                curr: 1,
+                prev: '上一页',
+                next: '下一页',
+                jump: function (obj,first) {
+                    if(!first){
+                        showvideolist(obj.curr*obj.limit - obj.limit,obj.limit,null,value);
+                    }
+
+                }
+            }
+        );
+
+    });
+}
 
 

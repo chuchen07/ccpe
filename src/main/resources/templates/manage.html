@@ -147,16 +147,16 @@
                         <div class="row">
 
                             <div class="col-md-3 col-md-offset-2">
-                                <select placeholder="请选择" class="form-control" id="spec_num0" name="spec_num" οnchange="document.getElementById('input0').value=$('#spec_num0 option:selected').text()">
-                                    <option value="first">初级课程</option>
-                                    <option value="second">进阶课程</option>
-                                    <option value="three">高级课程</option>
-                                    <option value="four">会员课程</option>
+                                <select  class="form-control" id="query0" name="spec_num" onchange="firstquery(this.value)">
+                                    <option value="">请选择</option>
+                                    <option value="初级">初级课程</option>
+                                    <option value="中级">中级课程</option>
+                                    <option value="高级">高级课程</option>
                                 </select>
                             </div>
                             <div class="col-md-1 col-md-offset-1"></div>
                             <div class="col-md-3 ">
-                                <input type="text" placeholder="请输入视频名称" class="form-control" id="" />
+                                <input type="text" placeholder="请输入视频名称" class="form-control" id="query1" onchange="secondquery(this.value)"/>
                             </div>
 
                         </div>
