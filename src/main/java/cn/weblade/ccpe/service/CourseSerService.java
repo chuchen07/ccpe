@@ -1,9 +1,6 @@
 package cn.weblade.ccpe.service;
 
-import cn.weblade.ccpe.entity.Course;
-import cn.weblade.ccpe.entity.FillBlank;
-import cn.weblade.ccpe.entity.Judge;
-import cn.weblade.ccpe.entity.MultipleChoice;
+import cn.weblade.ccpe.entity.*;
 
 import java.util.List;
 import java.util.Map;
@@ -19,6 +16,6 @@ public interface CourseSerService {
     public Map<String,Object> correctPaper(Integer paperId, Integer userId, String[] fillBlank, String[] judge, String[] multipleChoice);
     public Course queryAllRecordSubject(Integer userId);
     public Map<String,Object> correctWrongSubject(Integer userId, String[] fillBlank, String[] judge, String[] multipleChoice);
-
+    public List<Video> selectvideobyCourse(String courseName);
 
 }
