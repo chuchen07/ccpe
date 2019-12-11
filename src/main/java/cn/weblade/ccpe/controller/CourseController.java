@@ -28,13 +28,22 @@ public class CourseController {
     @Autowired
     VideoserviceImpl videoservice;
 
+    @RequestMapping("/subjectBrowsePage")
+    public ModelAndView subjectBrowse(){
+        ModelAndView mv=new ModelAndView("/subjectBrowse.html");
+        return mv;
+    }
+
+
     /*添加题*/
     @RequestMapping("/saveSubject")
     @ResponseBody
-    public String subjectAdd(MultipartFile file) throws Exception {
+    public Map<String,String> subjectAdd(String fileName) throws Exception {
+        Map<String,String>map=new HashMap<>();
 
-        String ret=courseService.saveSubject(file);
-        return ret;
+        String ret=courseService.saveSubject(fileName);
+        map.put("ret",ret);
+        return map;
     }
 
     /*删除题*/
@@ -49,10 +58,20 @@ public class CourseController {
 
     /*预览题，不添加进数据库*/
     @RequestMapping("/subjectBrowse")
-    public Course subjectBrowse(MultipartFile file) throws Exception {
-
-        Course ret=courseService.subjectBrowse(file);
+    @ResponseBody
+    public Course subjectBrowse(String fileName) throws Exception {
+        Course ret=courseService.subjectBrowse(fileName);
         return ret;
+    }
+
+    /*预览上传，不添加进数据库*/
+    @RequestMapping("/subjectBrowseUpload")
+    @ResponseBody
+    public Map<String,String> subjectBrowseUpload(MultipartFile file) throws Exception {
+        String str=courseService.subjectBrowseUpload(file);
+        Map<String,String>map=new HashMap<>();
+        map.put("str",str);
+        return map;
     }
 
 
