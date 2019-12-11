@@ -15,6 +15,7 @@ const dp = new DPlayer({
             maximum: 1000,
             bottom: '15%',
             unlimited: true,
+            addition: ['https://dplayer.moerats.com/v3/bilibili?aid=78551626']
         }
     }
 );
