@@ -188,4 +188,8 @@ $(function() {
         single_column_breakpoint: 700
     });
 
-});
+}
+
+
+
+);

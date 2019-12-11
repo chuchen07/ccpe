@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 
 <head>
     <meta charset="UTF-8">
@@ -41,9 +42,11 @@
                         <button type="submit" class="btn btn btn-primary btn-default glyphicon glyphicon-search">搜索</button>
                     </form>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/loginPage">登录</a></li>
+
+                        <li shiro:hasPermission="deleteOrder"><a href="/logout">退出</a></li>
+                        <li shiro:guest=""><a href="/loginPage">登录</a></li>
                         <li><a href="/registerPage">注册</a></li>
-                        <li><a onclick="return confirm('您的昵称为X，您的账号为X')" href="#" class="glyphicon glyphicon-user">个人中心</a></li>
+                        <li><a th:value="'用户名：'+${username}+','+'邮箱是:'+${email}" class="good glyphicon glyphicon-user">个人中心</a></li>
 
                     </ul>
                 </div>
@@ -209,6 +212,13 @@
     <script src="js/jquery-1.11.0.min.js"></script>
     <script src="js/pinterest_grid.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        $('.good').click(function(){
+            var data = $('.good').attr("value");
+            confirm(data);
+        })
+
+    </script>
 </body>
 
 </html>
