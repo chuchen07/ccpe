@@ -6,66 +6,87 @@
 body {
     background-color: #fbefef;
 }
-
-.nav a::before {
-    vertical-align: middle;
-    padding-right: 5px;
+tr{
+    color: #0f0f0f;
 }
+.container-fluid{
+    background-color: #eee;
 
-.title {
-    background-color: rgb(243, 248, 250);
-    height: 60px;
-    font-size: 36px;
-    text-align: center;
-    color: rgb(194, 206, 216);
 }
-
-.text {
-    position: relative;
-    transition: all 2s;
-    /* 让背面盒子保留3d空间 */
-    transform-style: preserve-3d;
-}
-
-.text:hover {
-    transform: rotateY(360deg);
-}
-
-.phy {
-    width: 100%;
-    height: 480px;
-    border-radius: 5px;
-    background-color: rgb(221, 218, 218);
-}
-
-.type {
-    margin-top: 10px;
-    width: 100%;
-    height: 100px;
-    border-radius: 10px;
-    background-color: #fff;
-    color: #000;
-    line-height: 90px;
-}
-
-.row {
-    margin: 5px auto;
-    margin-top: 10px;
-    color: #000;
-}
-
-.typename {
-    width: 130px;
-    font-size: 20px;
+.title{
+    color: #1c1c1c;
+    background-color: rgba(182, 181, 178, 0.36);
+    height: 50px;
+    font-size: 30px;
     text-align: center;
 }
-
-.col-md-2 {
-    text-align: left;
-    margin-left: 20px;
+#list{
+    background-color: #f0ffe7;
 }
-
-.type img {
-    width: 90px;
-    margin: 5px auto;
+#queryAllPaperName{
+    margin: 0 auto;
+    background-color: #f0ffe7;
+    width: 600px;
 }
+/*.nav a::before {*/
+/*    vertical-align: middle;*/
+/*    padding-right: 5px;*/
+/*}*/
+
+/*.title {*/
+/*    background-color: rgb(243, 248, 250);*/
+/*    height: 60px;*/
+/*    font-size: 36px;*/
+/*    text-align: center;*/
+/*    color: rgb(194, 206, 216);*/
+/*}*/
+
+/*.text {*/
+/*    position: relative;*/
+/*    transition: all 2s;*/
+/*    !* 让背面盒子保留3d空间 *!*/
+/*    transform-style: preserve-3d;*/
+/*}*/
+
+/*.text:hover {*/
+/*    transform: rotateY(360deg);*/
+/*}*/
+
+/*.phy {*/
+/*    width: 100%;*/
+/*    height: 480px;*/
+/*    border-radius: 5px;*/
+/*    background-color: rgb(221, 218, 218);*/
+/*}*/
+
+/*.type {*/
+/*    margin-top: 10px;*/
+/*    width: 100%;*/
+/*    height: 100px;*/
+/*    border-radius: 10px;*/
+/*    background-color: #fff;*/
+/*    color: #000;*/
+/*    line-height: 90px;*/
+/*}*/
+
+/*.row {*/
+/*    margin: 5px auto;*/
+/*    margin-top: 10px;*/
+/*    color: #000;*/
+/*}*/
+
+/*.typename {*/
+/*    width: 130px;*/
+/*    font-size: 20px;*/
+/*    text-align: center;*/
+/*}*/
+
+/*.col-md-2 {*/
+/*    text-align: left;*/
+/*    margin-left: 20px;*/
+/*}*/
+
+/*.type img {*/
+/*    width: 90px;*/
+/*    margin: 5px auto;*/
+/*}*/

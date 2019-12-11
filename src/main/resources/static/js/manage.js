@@ -15,9 +15,9 @@ $(function() {
             url: "/getAllRolePermission?time=" + new Date().getTime(),
             success: function (result) {
                 $.each(result, function (index, n) {
-                    var rid = $("<td style='width: 200px' bgcolor='#d3d3d3'></td>").append(n.rid);
+                    var rid = $("<td style='width: 200px' ></td>").append(n.rid);
                     var rname = $("<td style='width: 200px' ></td>").append(n.rname);
-                    var pid = $("<td style='width: 200px' bgcolor='#d3d3d3'></td>").append(n.pid);
+                    var pid = $("<td style='width: 200px' ></td>").append(n.pid);
                     var pname = $("<td style='width: 200px'></td>").append(n.pname);
                     var oradio =$("<input type='radio'/>");
 
