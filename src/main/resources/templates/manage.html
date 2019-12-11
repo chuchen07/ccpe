@@ -73,7 +73,7 @@
                     <div class="item" style="display: block;">
                         <div id="word" align="center">
                             <h1>用户信息管理
-                                <h1>
+                                </h1>
                         </div>
 
                         <table class="table table-striped" id="users_table">
@@ -137,7 +137,7 @@
                     <div class="item2" style="display: block;">
                         <div id="word" align="center">
                             <h1>视频管理
-                                <h1>
+                                </h1>
                         </div>
                         <div class="row">
 
@@ -156,8 +156,12 @@
 
                         </div>
 
-                        <table class="table table-striped" id="video_table">
-
+                        <table class="layui-table" id="video_table">
+                            <colgroup>
+                                <col width="150">
+                                <col width="200">
+                                <col>
+                            </colgroup>
                             <thead>
                             <tr>
                                 <th>视频名称</th>
@@ -165,17 +169,17 @@
                                 <th>删除</th>
                             </tr>
                             </thead>
-                            <tbody id="nr">
-
+                            <tbody>
                             </tbody>
                         </table>
-
+                    <div id="pagen"style="margin-left: 400px">
+                    </div>
                     </div>
 
                     <div class="item2">
                         <div id="word" align="center">
                             <h1>上传视频
-                                <h1>
+                                </h1>
                         </div>
 
                         <div class="uploadVideo">
@@ -231,7 +235,7 @@
                     <div class="item3" style="display: block;">
                         <div id="word" align="center">
                             <h1>题库管理
-                                <h1>
+                                </h1>
                         </div>
                         <table class=" table table-striped" id="test_table">
 
@@ -255,7 +259,7 @@
                     <div class="item3">
                         <div id="word" align="center">
                             <h1>上传题库
-                                <h1>
+                                </h1>
                         </div>
                         <div class="uploadVideo">
                             <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
@@ -297,11 +301,9 @@
 <script src="js/pinterest_grid.js"></script>
 <script src="layui/layui.js"></script>
 <script src="js/manage.js"></script>
-
 <script src="js/role.js"></script>
 <script src="js/video.js"></script>
 <script src="js/myAjax.js"></script>
-<script src="layui/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
     layui.use('upload', function() {
