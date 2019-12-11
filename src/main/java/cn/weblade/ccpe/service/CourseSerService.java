@@ -7,7 +7,7 @@ import java.util.Map;
 
 public interface CourseSerService {
     public int updateSubject();
-    public Course querySubject(String paperName);
+    public Course querySubject(Integer paperId);
     public int queryPaperNameById(String paperName);
     public List selectPaperName();
     public List<FillBlank> queryAllFillBlank();
