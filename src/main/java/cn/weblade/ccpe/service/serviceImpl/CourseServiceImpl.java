@@ -64,6 +64,7 @@ public class CourseServiceImpl implements CourseService {
 
         /*插入试卷信息*/
         Paper paper=new Paper();
+        fileName.replace(".docx","");
         paper.setPaperName(fileName);
         paperMapper.insertReKey(paper);
         multipleChoice.setPaperId(paper.getPaperId());
