@@ -1,8 +1,8 @@
-ajaxGetData();
-var cacheData= goTo();//读取缓存的对象
-function ajaxGetData(currentPage) {
+Data();
+//var cacheData= goTo();//读取缓存的对象
+function Data() {
     $("#video_table tbody").empty();
-    var currentPage=currentPage || 1;
+
     $.ajax({
         url:"/queryVideoByCourseAndName",
         type:"post",
@@ -34,7 +34,7 @@ function ajaxGetData(currentPage) {
                         success:function(result){
                             if(result.deletevideo==1){
                                 alert("成功：该视频已删除");
-                                ajaxGetData();
+                                Data();
                             }else{
                                 alert("失败：删除视频失败");
                             }
@@ -58,18 +58,19 @@ function ajaxGetData(currentPage) {
 //以上用户信息管理分页结束
 
 
-    function goTo() {
-        var cache = {};//闭包缓存池
-        return{
-            set:function(currentPage,data){
-                cache[currentPage] =data;
-            },//添加方法
-            get:function (currentPage) {
-                if (currentPage in cache){
-                    console.log("数据已缓存，无需再请求");
-                }else {
-                    ajaxGetData();
-                }
-            }//读取方法
-        }
-    }}
+    // function goTo() {
+    //     var cache = {};//闭包缓存池
+    //     return{
+    //         set:function(currentPage,data){
+    //             cache[currentPage] =data;
+    //         },//添加方法
+    //         get:function (currentPage) {
+    //             if (currentPage in cache){
+    //                 console.log("数据已缓存，无需再请求");
+    //             }else {
+    //                 Data();
+    //             }
+    //         }//读取方法
+    //     }
+    // }
+}
