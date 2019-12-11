@@ -19,10 +19,14 @@ $(function() {
                     var rname = $("<td style='width: 200px' ></td>").append(n.rname);
                     var pid = $("<td style='width: 200px' bgcolor='#d3d3d3'></td>").append(n.pid);
                     var pname = $("<td style='width: 200px'></td>").append(n.pname);
+                    var oradio =$("<input type='radio'/>");
+                    oradio.attr("rid",n.rid);
+                    oradio.attr("pid",n.pid);
                     $("<tr></tr>").append(rid)
-                        .append(rname).append(pid).append(pname).appendTo($("#test"));
+                        .append(rname).append(pid).append(pname).append(oradio).appendTo($("#test"));
                 })
             }
+
         })
 
     }

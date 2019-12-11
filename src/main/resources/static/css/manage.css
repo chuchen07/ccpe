@@ -153,8 +153,11 @@ td{
     overflow:hidden;
     text-overflow: ellipsis;
 }
-.test{
-
+#test{
+    background-color: #b6b5b2;
+    width: 800px;
+    height: 300px;
+    margin-left: 360px;
 }
 
 .caozuo {
