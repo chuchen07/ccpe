@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd" >
+<head>
+    <meta charset="UTF-8">
+    <title>subject_ajax</title>
+
+</head>
+<body onload="answerWrongSubject()">
+
+<div id="answerWrongSubject">
+
+</div>
+
+
+  </body>
+
+<script src="js/jquery.js"></script>
+<script>
+    function answerWrongSubject(){;
+        $.ajax({
+            type: "post",
+            url: "/queryAllRecordSubject",
+            data:{"userId":1},
+            dataType: "json", //返回数据类型
+            success: function(data){
+                console.log(data);
+
+                /*选择题*/
+                var str="";
+                str += '<fieldset>';
+                str +='<h3>单选题（5分/题）</h3>';
+                str +='<div>';
+                str += '<fieldset id="multipleChoice">';
+                for(var i=0;i<data.multipleChoiceList.length;i++) {
+                    var list = data.multipleChoiceList[i];
+                    list.context=list.context.replace(/</g,"&lt;");
+                    str +='<div id="multipleChoice'+i+'">';
+                    str += '<span style="white-space: pre-line;font-size: larger">'+(i+1)+'. '+list.context+'</span><br/><br/>';
+                    console.log(list.context);
+                    str += ' <label><input type="radio" value="A" name="multipleChoiceAnswer'+i+'"/>'+'A. '+list.answer1+'</label><br/>';
+                    str += ' <label><input type="radio" value="B" name="multipleChoiceAnswer'+i+'"/>'+'B. '+list.answer2+'</label><br/>';
+                    str += ' <label><input type="radio" value="C" name="multipleChoiceAnswer'+i+'"/>'+'C. '+list.answer3+'</label><br/>';
+                    str += ' <label><input type="radio" value="D" name="multipleChoiceAnswer'+i+'"/>'+'D. '+list.answer4+'</label><br/><br/>';
+                    str +='</div>';
+                }
+                str += '</fieldset>';
+                str += '</div>';
+                str += '</fieldset>';
+
+
+                /*判断题*/
+                str += '<fieldset>';
+                str +='<h3>判断题（5分/题）</h3>';
+                str +='<div>';
+                str += '<fieldset id="judge">';
+                for(var i=0;i<data.judgeList.length;i++) {
+                    var list = data.judgeList[i];
+                    str +='<div id="judge'+i+'">';
+                    str += '<p style="font-size: larger">'+(i+1)+'. '+list.context+'</p>';
+                    str += ' <label><input type="radio" value="对" name="answer'+i+'"/>'+'对'+'<br/>';
+                    str += ' <label><input type="radio" value="错" name="answer'+i+'"/>'+'错'+'</label><br/>';
+                    str +='</div>';
+                }
+                str += '</fieldset>';
+                str += '</div>';
+                str += '</fieldset>';
+
+
+                /*填空题*/
+                str += '<fieldset>';
+                str +='<h3>填空题（5分/题）</h3>';
+                str +='<div>';
+                str += '<fieldset id="fillBlank">';
+                for(var i=0;i<data.fillBlankList.length;i++) {
+                    var list = data.fillBlankList[i];
+                    str +='<div>';
+                    list.context=list.context.replace(/_______/g,"<label><input type='text' style='border-bottom: 1px solid;border-left: 0px;border-right: 0px;border-top: 0px' /></label>");
+                    str += '<p  id="fillBlank'+i+'">'+(i+1)+'. '+list.context+'</p>';
+                    str +='</div>';
+                }
+                str += '</fieldset>';
+                str += '</div>';
+                str += '</fieldset>';
+                str += '<input type="button" id="submitButton" onclick="submitButton()" value="提交" />';
+                str += '<input type="button" id="checkAnswer" style="display: none" onclick="checkAnswer()" value="查看答案" />';
+                $("#answerWrongSubject").html(str);
+            },
+            error:function (data){
+            }
+        });
+    }
+
+
+
+
+    /*提交*/
+    function submitButton(){
+        var i=0;
+        var j=0;
+        var k=0;
+        var multipleChoiceAnswer=[];
+        var judgeAnswer=[];
+        var fillBlankAnswer=[];
+
+        /*获取选择题答案*/
+        $("#multipleChoice div").each(
+            function(){
+                var isnull=i;
+                $("#multipleChoice"+i+" label").each(
+                    function(){
+                        // console.log($(this).find('input:checked').val());
+                        if($(this).find('input').prop("checked")){
+                            multipleChoiceAnswer[i]=$(this).find('input:checked').val();
+                            i++;
+                        }else{
+                            multipleChoiceAnswer[i]="";
+                        }
+                    })
+                if(isnull==i){
+                    i++;
+                }
+            })
+        console.log(multipleChoiceAnswer);
+
+        /*获取判断题答案*/
+        $("#judge div").each(
+            function(){
+                var isnull=j;
+                $("#judge"+j+" label").each(
+                    function(){
+                        if($(this).find('input').prop("checked")){
+                            judgeAnswer[j]=$(this).find('input:checked').val();
+                            j++;
+                        }else{
+                            judgeAnswer[j]="";
+                        }
+                    })
+                if(isnull==j){
+                    j++;
+                }
+            })
+        console.log(judgeAnswer);
+
+        /*获填空题答案*/
+        $("#fillBlank div").each(
+            function(){
+                fillBlankAnswer[k]="";
+                $("#fillBlank"+k+" label").each(
+                    function(){
+                            fillBlankAnswer[k]+=$(this).find('input:text').val();
+                            fillBlankAnswer[k]+=" ";
+                    })
+                k++;
+            })
+        console.log(fillBlankAnswer);
+        $.ajax({
+            type: "post",
+            url: "/correctWrongSubject",
+            data:{'userId':1,'multipleChoiceAnswer':multipleChoiceAnswer,'judgeAnswer':judgeAnswer,'fillBlankAnswer':fillBlankAnswer},
+            dataType: "json", //返回数据类型
+            traditional: true,
+            success: function(data){
+                /*隐藏提交按钮*/
+                $("#submitButton").hide();
+                $("#checkAnswer").show();
+
+                /*批改后选择题的状态*/
+                var multipleChoiceData=data.multipleChoice;
+                var index=0;
+                $("#multipleChoice div").each(
+                    function(){
+                        var indexAnswer=0;
+                        $("#multipleChoice"+indexAnswer+" label").each(
+                            function(){
+                                if(!multipleChoiceData[index]){
+                                    $("#multipleChoice"+index).find('input:checked').parent("label").css("color","red");
+                                    $("#multipleChoice"+index).children("span").css("color","red");
+                                    indexAnswer++;
+                                }
+                            })
+                        index++;
+                    })
+
+                /*批改后判断题的状态*/
+                var judgeData=data.judge;
+                var index=0;
+                $("#judge div").each(
+                    function(){
+                        var indexAnswer=0;
+                        $("#judge"+indexAnswer+" label").each(
+                            function(){
+                                if(!judgeData[index]){
+                                    console.log($("#judge"+index).children("p").val());
+                                    $("#judge"+index).children("p").css("color","red");
+                                    indexAnswer++;
+                                }
+                            })
+                        index++;
+                    })
+
+
+                /*批改后填空题的状态*/
+                var fillBlankData=data.fillBlank;
+                console.log(fillBlankData);
+                var index=0;
+
+                $("#fillBlank div").each(
+                    function(){
+                        var indexAnswer=0;
+                        var fillBlankList=fillBlankData[index];
+                        $("#fillBlank"+index+" label").each(
+                            function(){
+                                if(!fillBlankList[indexAnswer]){
+                                    console.log($("#fillBlank"+index).children("label").children("input"));
+                                    $("#fillBlank"+index).children("label").eq(indexAnswer).find("input").css("color","red");
+                                }
+                                indexAnswer++;
+                            })
+                        index++;
+                    })
+            }
+        });
+    }
+
+</script>
+<script type="text/javascript" th:src="@{webjars/jquery/jquery.js}"></script>
+</html>
+
+<!--map.put("fillBlank",fillBlankAnswerList);-->
+<!--map.put("judge",bJud);-->
+<!--map.put("multipleChoice",bMul);-->

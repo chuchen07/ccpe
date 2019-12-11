@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -31,6 +30,7 @@ public class CourseController {
 
     /*添加题*/
     @RequestMapping("/saveSubject")
+    @ResponseBody
     public String subjectAdd(MultipartFile file) throws Exception {
 
         String ret=courseService.saveSubject(file);
@@ -39,10 +39,11 @@ public class CourseController {
 
     /*删除题*/
     @RequestMapping("/deleteSubject")
-    public int subjectDelete(String paperName){
+    @ResponseBody
+    public String subjectDelete(@RequestParam("paperName")String paperName){
 
-        courseService.deleteSubject(paperName);
-        return 0;
+        String ret=courseService.deleteSubject(paperName);
+        return ret;
     }
 
 

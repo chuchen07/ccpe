@@ -177,18 +177,39 @@ public class CourseServiceImpl implements CourseService {
     /*删除*/
     @Override
     @Transactional
-    public int deleteSubject(String paperName) {
-       String filePath="C:\\Users\\pc\\Desktop\\flyChicken\\";
-       File file=new File(filePath+paperName+".docx");
-       file.delete();
-       int paperId=courseSerMapper.selectPaperByPaperName(paperName+".docx");
+    public String deleteSubject(String paperName) {
+        try {
+            String filePath = "C:\\Users\\Administrator\\Desktop\\flyChichen\\";
+            File file = new File(filePath + paperName + ".docx");
+            file.delete();
+            Integer paperId = courseSerMapper.selectPaperByPaperName(paperName + ".docx");
 
-       fillBlankMapper.FillBlankDelete(paperId);
-       judgeMapper.JudgeDelete(paperId);
-       multipleChoiceMapper.MultipleChoiceDelete(paperId);
-       paperMapper.PaperDelete(paperId);
-        return 0;
-}
+            if (paperId != null || paperId != 0) {
+                fillBlankMapper.FillBlankDelete(paperId);
+                judgeMapper.JudgeDelete(paperId);
+                multipleChoiceMapper.MultipleChoiceDelete(paperId);
+                paperMapper.PaperDelete(paperId);
+                return "删除成功";
+            } else {
+                return "删除失败";
+            }
+
+        } catch (Exception e) {
+            return "删除失败";
+        }
+    }
+//    public int deleteSubject(String paperName) {
+//       String filePath="C:\\Users\\pc\\Desktop\\flyChicken\\";
+//       File file=new File(filePath+paperName+".docx");
+//       file.delete();
+//       int paperId=courseSerMapper.selectPaperByPaperName(paperName+".docx");
+//
+//       fillBlankMapper.FillBlankDelete(paperId);
+//       judgeMapper.JudgeDelete(paperId);
+//       multipleChoiceMapper.MultipleChoiceDelete(paperId);
+//       paperMapper.PaperDelete(paperId);
+//       return 0;
+//}
 
     @Override
     public Course subjectBrowse(MultipartFile file) throws Exception{
