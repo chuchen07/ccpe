@@ -1,10 +1,16 @@
 body{
+    margin: 0;
+    padding: 0;
     text-align: center;
-    background-color: #fbefef;
+   background-image: url(/img/lighten4.jpg);
+    background-size: cover;
+    z-index: -1;
+
 }
 
 .divstyle{
-
+    width: 350px;
+    background:rgba(255,255,255,0.1);
     text-align: center;
     margin-top: 50px;
 }
@@ -37,6 +43,9 @@ body{
 #HelpModal{margin-top: 95px;height: 300px;overflow-y: hidden;}
 /*添加滚动条*/
 .modal-body{overflow: auto;max-height:400px;}
+.text-muted{
+    color: #cad3da!important;
+}
 .remember:hover{
     color:darkred!important;
     text-decoration: underline!important;
