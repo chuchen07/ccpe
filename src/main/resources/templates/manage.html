@@ -163,11 +163,6 @@
                                 <th>视频名称</th>
                                 <th>课程类型</th>
                                 <th>删除</th>
-                            <tr th:each="video:${videoList}">
-                                <td th:text="${video.videoName}"></td>
-                                <td th:text="${video.courseName}"></td>
-                                <a class="btn btn-sm btn-primary" th:href="@{/deletevideo/?}+${video.videoId}">编辑</a>
-                                <td>
                             </tr>
                             </thead>
                             <tbody id="nr">
