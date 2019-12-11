@@ -22,7 +22,7 @@
 </head>
 
 <body>
-<div class="container">
+
     <!-- 一个view代表一个管理界面 -->
 
     <div class="row">
@@ -39,11 +39,12 @@
         <div class="col-md-9">
             <div class="bar">
                 <ul class="navbar">
+
                     <!-- 一个type代表一个管理选择器 -->
                     <li class="type">用户管理</li>
                     <li class="type">视频管理</li>
                     <li class="type">题库管理</li>
-                    <li class="glyphicon glyphicon-user">管理员</li>
+                    <li id="ad_text">Welcome To The Administrator Interface!</li>
 
                 </ul>
             </div>
@@ -55,7 +56,7 @@
         <!-- 用户管理模块 -->
         <div class="view" style="display: block;">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-2">
 
                     <div class="nav">
                         <ul>
@@ -68,7 +69,7 @@
                         <p id="ad_text">广告栏招租中</p>
                     </div>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-10">
                     <div class="item" style="display: block;">
                         <div id="word" align="center">
                             <h1>用户信息管理
@@ -93,13 +94,13 @@
                         </table>
 
                         <div style="width:30%; margin:0px auto">
-                            <ul class="pagination" id="pagelist">
+                            <ul class="pagination" >
                                 <li><a>&laquo;</a></li>
-                                <li class="active"><a>1</a></li>
-                                <li class="disabled"><a>2</a></li>
-                                <li><a>3</a></li>
-                                <li><a>4</a></li>
-                                <li><a>5</a></li>
+                                <li class="active"><a class="aa">1</a></li>
+                                <li><a class="aa">2</a></li>
+                                <li><a class="aa">3</a></li>
+                                <li><a class="aa">4</a></li>
+                                <li><a class="aa">5</a></li>
                                 <li><a>&raquo;</a></li>
                             </ul>
                         </div>
@@ -118,7 +119,7 @@
         <div class="view">
 
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-2">
 
                     <div class="nav">
                         <ul>
@@ -132,7 +133,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-9">
+                <div class="col-md-10">
                     <div class="item2" style="display: block;">
                         <div id="word" align="center">
                             <h1>视频管理
@@ -217,7 +218,7 @@
         <div class="view">
 
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-2">
 
                     <div class="nav">
                         <ul>
@@ -231,7 +232,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-9">
+                <div class="col-md-10">
                     <div class="item3" style="display: block;">
                         <div id="word" align="center">
                             <h1>题库管理
@@ -293,7 +294,7 @@
 
     </div>
 
-</div>
+
 
 
 <!-- //瀑布流插件 -->
@@ -301,7 +302,7 @@
 <script src="js/pinterest_grid.js"></script>
 <script src="layui/layui.js"></script>
 <script src="js/manage.js"></script>
-<script src="js/test.js"></script>
+
 <script src="js/role.js"></script>
 <script src="js/video.js"></script>
 <script src="js/myAjax.js"></script>
