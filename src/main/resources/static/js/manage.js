@@ -20,11 +20,17 @@ $(function() {
                     var pid = $("<td style='width: 200px' bgcolor='#d3d3d3'></td>").append(n.pid);
                     var pname = $("<td style='width: 200px'></td>").append(n.pname);
                     var oradio =$("<input type='radio'/>");
+
                     oradio.attr("rid",n.rid);
                     oradio.attr("pid",n.pid);
                     $("<tr></tr>").append(rid)
                         .append(rname).append(pid).append(pname).append(oradio).appendTo($("#test"));
+
                 })
+                var saveBtn = $("<button style='width: 100px;height: 40px'></button>").addClass("btn btn-primary btn-sm")
+                    .append($("<span></span>")).append("保存");
+                var btn = $("<btn></btn>").append(saveBtn);
+                $("<btn></btn>").append(saveBtn).appendTo($("#test"));
             }
 
         })
@@ -115,6 +121,7 @@ $(function() {
                      .append($("<span></span>").addClass("glyphicon glyphicon-edit")).append("编辑");
                  var deleBtn = $("<button ></button>").addClass("btn btn-danger ")
                      .append($("<span></span>").addClass("glyphicon glyphicon-trash")).append("删除");
+
 
 
                  // onclick='javascript:this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);'
