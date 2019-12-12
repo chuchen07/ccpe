@@ -28,7 +28,7 @@
             dataType: "json", //返回数据类型
             success: function(data){
                 console.log(data);
-
+                sessionStorage.setItem("date",date);
                 /*选择题*/
                 var str="";
                 str += '<fieldset>';
@@ -177,6 +177,7 @@
                 /*隐藏提交按钮*/
                 $("#submitButton").hide();
                 $("#checkAnswer").show();
+                var answerDate=sessionStorage.getItem("date");
 
                 /*批改后选择题的状态*/
                 var multipleChoiceData=data.multipleChoice;
@@ -189,6 +190,7 @@
                                 if(!multipleChoiceData[index]){
                                     $("#multipleChoice"+index).find('input:checked').parent("label").css("color","red");
                                     $("#multipleChoice"+index).children("span").css("color","red");
+
                                     indexAnswer++;
                                 }
                             })

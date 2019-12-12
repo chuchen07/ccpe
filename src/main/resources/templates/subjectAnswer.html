@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>subjectAnswer</title>
+</head>
+<body onload="subjectAnswer()">
+
+</body>
+
+<script>
+    function allSubject(){
+        $.ajax({
+            type: "get",
+            url: "/subjectAnswer",
+            dataType: "json", //返回数据类型
+            success: function(data){
+                var str=$("#queryAllPaperName").html();
+                for(var i=0;i<data.length;i++) {
+                    var list = data[i];
+                    str += '<tr>';
+                    str += '<td style="color: #0f0f0f;width: 300px "><input style="border: 0px" name="paperId" type="text"  value=' + list.paperId + ' readonly="readonly"/></td>';
+                    str += '<td style="color: #0f0f0f;width: 300px "><input name="paperName" style="border: 0px" type="text"  value=' + list.paperName + ' readonly="readonly"/></td>';
+                    str += '<td style="color: #0f0f0f;width: 300px "><input style="width: 100px" class="btn btn-primary" type="button" href="answerSubject.html" onclick="answerButton(&apos;'+list.paperId+'&apos;)" value="开始答题" /></td>';
+                    str += '</tr>';
+                }
+                $("#queryAllPaperName").html(str);
+            },
+            error:function (data){
+            }
+        });
+    }
+
+</script>
+</html>
