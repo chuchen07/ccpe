@@ -18,7 +18,7 @@
 <body>
     <div class="nav1">
         <ul class="layui-nav layui-bg-cyan">
-            <li class="layui-nav-item"><a href=""><img src="img/logo.png" class="layui-nav-img"/>飞鸡小课堂</a></li>
+            <li class="layui-nav-item"><a th:href="@{/course}"><img src="img/logo.png" class="layui-nav-img"/>飞鸡小课堂</a></li>
             <li class="layui-nav-item " th:classappend="${videoback[0].courseName == '初级'} ? 'layui-this' : '' "><a href="/video?courseName=初级">初级课程</a></li>
             <li class="layui-nav-item" th:classappend="${videoback[0].courseName == '中级'} ? 'layui-this' : '' "><a href="/video?courseName=中级">中级课程</a></li>
             <li class="layui-nav-item" th:classappend="${videoback[0].courseName == '高级'} ? 'layui-this' : '' "><a href="/video?courseName=高级">高级课程</a></li>

@@ -44,6 +44,8 @@
                     <li class="type">用户管理</li>
                     <li class="type">视频管理</li>
                     <li class="type">题库管理</li>
+                    <li shiro:hasPermission="deleteOrder"><a href="/logout" style="color:rgba(99, 112, 112, 0.959)">退出</a></li>
+                    <li shiro:guest=""><a href="/loginPage" style="color:rgba(99, 112, 112, 0.959)">登录</a></li>
                     <li id="ad_text">Welcome To The Administrator Interface!</li>
 
                 </ul>
@@ -302,7 +304,15 @@
 <script src="js/role.js"></script>
 <script src="js/video.js"></script>
 <script src="js/myAjax.js"></script>
-<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<!--    退出登录-->
+    <script>
+        $('.good').click(function(){
+            var data = $('.good').attr("value");
+            confirm(data);
+        })
+
+    </script>
+<!-- 视频上传-->
 <script>
     layui.use('upload', function() {
         var $ = layui.jquery,
