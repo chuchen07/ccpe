@@ -54,41 +54,19 @@ public class ShiroConfig {
         // 待删deleteUser
 
 
-        filterMap.put("/*","anon");
-        filterMap.put("/logout","logout");
- /*       filterMap.put("/updateUser","anon");
-        filterMap.put("/deleteUser","anon");
-
-
-        filterMap.put("/updateUser","anon");
-        filterMap.put("/deleteUser","anon");
-
-        filterMap.put("/exam","anon");
-        filterMap.put("/answer","anon");
-        filterMap.put("/course","anon");
         filterMap.put("/main","anon");
-        filterMap.put("/manage","anon");
-        filterMap.put("/test","anon");
-        filterMap.put("/data","anon");
         filterMap.put("/index","anon");
         filterMap.put("/emailcheck","anon");
         filterMap.put("/login","anon");
 
-        filterMap.put("/registerPage","anon");
-        filterMap.put("/register","anon");
-        filterMap.put("/registerCheck","anon");
-        filterMap.put("/static/*","anon");
         filterMap.put("/logout","logout");
         filterMap.put("/registerPage","anon");
         filterMap.put("/register","anon");
         filterMap.put("/registerCheck","anon");
         filterMap.put("/static/*","anon");
 
-        filterMap.put("/subjectBrowse","anon");
-        filterMap.put("/upload","anon");
-        filterMap.put("/exam","anon");
-        filterMap.put("/*","anon");
-        filterMap.put("/*","authc");*/
+
+        filterMap.put("/*","authc");
 
 
        //设置未授权界面

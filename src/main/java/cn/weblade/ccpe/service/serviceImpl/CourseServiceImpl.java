@@ -42,8 +42,8 @@ public class CourseServiceImpl implements CourseService {
     @Transactional
     public String saveSubject(String fileName) throws Exception {
 //        String fileName=file.getOriginalFilename();
-        String filePath="C:\\Users\\Administrator\\Desktop\\健康教育\\";
-        String cachePath="C:\\Users\\Administrator\\Desktop\\健康教育\\cache\\";
+        String filePath="F:\\ChickenVideo\\健康教育\\";
+        String cachePath="F:\\ChickenVideo\\健康教育\\cache\\";
         File subjectFile=new File(filePath+fileName);
         File cacheFile=new File(cachePath+fileName);
 
@@ -182,7 +182,7 @@ public class CourseServiceImpl implements CourseService {
     @Transactional
     public String deleteSubject(String paperName) {
         try {
-            String filePath = "C:\\Users\\Administrator\\Desktop\\健康教育\\";
+            String filePath = "F:\\ChickenVideo\\健康教育\\";
             File file = new File(filePath + paperName+".docx");
             file.delete();
             Integer paperId = courseSerMapper.selectPaperByPaperName(paperName);
@@ -217,7 +217,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Course subjectBrowse(String fileName) throws Exception{
 //        String fileName=file.getOriginalFilename();
-        String filePath="C:\\Users\\Administrator\\Desktop\\健康教育\\cache\\";
+        String filePath="F:\\ChickenVideo\\健康教育\\cache\\";
         File subjectFile=new File(filePath+fileName);
 
         String subjectContext=null;
@@ -350,7 +350,7 @@ public class CourseServiceImpl implements CourseService {
     @Transactional
     public String subjectBrowseUpload(MultipartFile file) throws Exception {
         String fileName=file.getOriginalFilename();
-        String filePath="C:\\Users\\Administrator\\Desktop\\健康教育\\cache\\";
+        String filePath="F:\\ChickenVideo\\健康教育\\cache\\";
         File subjectFile=new File(filePath+fileName);
 
         /*保存*/
