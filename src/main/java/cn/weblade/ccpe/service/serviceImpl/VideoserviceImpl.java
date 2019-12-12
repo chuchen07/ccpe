@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class VideoserviceImpl implements Videoservice {
@@ -50,8 +51,8 @@ public class VideoserviceImpl implements Videoservice {
 
     //返回视频列表
     @Override
-    public List<Video> getvideo(Video video) {
-        return courseMapper.getvideo(video);
+    public List<Video> getvideo(Map map) {
+        return courseMapper.getvideo(map);
     }
 
     @Override

@@ -134,8 +134,13 @@ public class CourseController {
     //视频列表，通过课程名称和名字查询
     @RequestMapping("/queryVideoByCourseAndName")
     @ResponseBody
-    public List<Video> getvideo(Video video){
-        List<Video> videoList=videoservice.getvideo(video);
+    public List<Video> getvideo(String courseName,String videoName,int start,int size){
+        Map<String,Object> map=new HashMap<>();
+        map.put("courseName",courseName);
+        map.put("videoName",videoName);
+        map.put("start",start);
+        map.put("size",size);
+        List<Video> videoList=videoservice.getvideo(map);
         return videoList;
     }
 

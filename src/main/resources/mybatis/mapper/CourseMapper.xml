@@ -14,7 +14,7 @@
     </resultMap>
 
     <!--返回视频列表-->
-    <select id="getvideo" parameterType="cn.weblade.ccpe.entity.Video" resultMap="videoMap">
+    <select id="getvideo" parameterType="map" resultMap="videoMap">
         select * from video
         <where>
             <if test="courseName != null and courseName !='' "> and course_name=#{courseName}
@@ -22,6 +22,7 @@
             <if test="videoName != null and videoName !='' "> and video_name like '%' #{videoName} '%'
             </if>
         </where>
+        limit #{start},#{size};
     </select>
 
     <select id="test" resultMap="videoMap">
