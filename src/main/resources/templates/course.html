@@ -39,9 +39,10 @@
                         <button type="submit" class="btn btn btn-primary btn-default glyphicon glyphicon-search">搜索</button>
                     </form>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/loginPage">登录</a></li>
+                        <li shiro:hasPermission="deleteOrder"><a href="/logout">退出</a></li>
+                        <li shiro:guest=""><a href="/loginPage">登录</a></li>
                         <li><a href="/registerPage">注册</a></li>
-                        <li><a href="#" class="glyphicon glyphicon-user">个人中心</a></li>
+                        <li><a th:value="'用户名：'+${username}+','+'邮箱是:'+${email}" class="good glyphicon glyphicon-user">个人中心</a></li>
 
                     </ul>
                 </div>
@@ -207,6 +208,13 @@
     <!-- //瀑布流插件 -->
     <script src="js/jquery-1.11.0.min.js"></script>
     <script src="js/pinterest_grid.js"></script>
+    <script>
+        $('.good').click(function(){
+            var data = $('.good').attr("value");
+            confirm(data);
+        })
+
+    </script>
 </body>
 
 </html>
