@@ -64,6 +64,7 @@ public class CourseServiceImpl implements CourseService {
 
         /*插入试卷信息*/
         Paper paper=new Paper();
+        fileName=fileName.replace(".docx","");
         paper.setPaperName(fileName);
         paperMapper.insertReKey(paper);
         multipleChoice.setPaperId(paper.getPaperId());
@@ -182,7 +183,7 @@ public class CourseServiceImpl implements CourseService {
     public String deleteSubject(String paperName) {
         try {
             String filePath = "C:\\Users\\Administrator\\Desktop\\健康教育\\";
-            File file = new File(filePath + paperName);
+            File file = new File(filePath + paperName+".docx");
             file.delete();
             Integer paperId = courseSerMapper.selectPaperByPaperName(paperName);
 

@@ -7,7 +7,7 @@ console.log(paperName);
         data:{"paperName":paperName},
         type:"post",
         success:function(result){
-            console.log(result);
+            window.location.reload();
 
         }
     })

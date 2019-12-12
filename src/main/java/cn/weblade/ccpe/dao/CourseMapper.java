@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 @Mapper
@@ -33,7 +34,7 @@ public interface CourseMapper {
 
 
     //用于视频列表，视频课程查询
-    public List<Video> getvideo(Video video);
+    public List<Video> getvideo(Map map);
 
     //测试
     public List<Video> test();

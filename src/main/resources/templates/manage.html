@@ -73,7 +73,7 @@
                     <div class="item" style="display: block;">
                         <div id="word" align="center">
                             <h1>用户信息管理
-                                <h1>
+                                </h1>
                         </div>
                         <div>
                             <input style="width: 200px;float:left;" type="text" placeholder="请输入查询内容" class="form-control" id="" />
@@ -142,50 +142,49 @@
                     <div class="item2" style="display: block;">
                         <div id="word" align="center">
                             <h1>视频管理
-                                <h1>
+                                </h1>
                         </div>
                         <div class="row">
 
                             <div class="col-md-3 col-md-offset-2">
-                                <select placeholder="请选择" class="form-control" id="spec_num0" name="spec_num" οnchange="document.getElementById('input0').value=$('#spec_num0 option:selected').text()">
-                                    <option value="first">初级课程</option>
-                                    <option value="second">进阶课程</option>
-                                    <option value="three">高级课程</option>
-                                    <option value="four">会员课程</option>
+                                <select  class="form-control" id="query0" name="spec_num" onchange="firstquery(this.value)">
+                                    <option value="">请选择</option>
+                                    <option value="初级">初级课程</option>
+                                    <option value="中级">中级课程</option>
+                                    <option value="高级">高级课程</option>
                                 </select>
                             </div>
                             <div class="col-md-1 col-md-offset-1"></div>
                             <div class="col-md-3 ">
-                                <input type="text" placeholder="请输入视频名称" class="form-control" id="" />
+                                <input type="text" placeholder="请输入视频名称" class="form-control" id="query1" onchange="secondquery(this.value)"/>
                             </div>
 
                         </div>
 
-                        <table class="table table-striped" id="video_table">
-
+                        <table class="layui-table" id="video_table">
+                            <colgroup>
+                                <col width="150">
+                                <col width="200">
+                                <col>
+                            </colgroup>
                             <thead>
                             <tr>
                                 <th>视频名称</th>
                                 <th>课程类型</th>
                                 <th>删除</th>
-                            <tr th:each="video:${videoList}">
-                                <td th:text="${video.videoName}"></td>
-                                <td th:text="${video.courseName}"></td>
-                                <a class="btn btn-sm btn-primary" th:href="@{/deletevideo/?}+${video.videoId}">编辑</a>
-                                <td>
                             </tr>
                             </thead>
-                            <tbody id="nr">
-
+                            <tbody>
                             </tbody>
                         </table>
-
+                    <div id="pagen"style="margin-left: 400px">
+                    </div>
                     </div>
 
                     <div class="item2">
                         <div id="word" align="center">
                             <h1>上传视频
-                                <h1>
+                                </h1>
                         </div>
 
                         <div class="uploadVideo">
@@ -241,7 +240,7 @@
                     <div class="item3" style="display: block;">
                         <div id="word" align="center">
                             <h1>题库管理
-                                <h1>
+                                </h1>
                         </div>
                         <table class=" table table-striped" id="test_table">
 
@@ -256,7 +255,7 @@
                     <div class="item3">
                         <div id="word" align="center">
                             <h1>上传题库
-                                <h1>
+                                </h1>
                         </div>
                         <div class="uploadVideo">
                             <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
@@ -272,7 +271,7 @@
                                         <tr>
                                             <th>文件名</th>
                                             <th>大小</th>
-                                            <th>状态</th>
+
                                             <th>操作</th>
                                         </tr>
                                         </thead>
@@ -303,7 +302,6 @@
 <script src="js/role.js"></script>
 <script src="js/video.js"></script>
 <script src="js/myAjax.js"></script>
-<script src="layui/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
     layui.use('upload', function() {

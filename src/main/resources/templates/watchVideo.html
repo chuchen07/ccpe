@@ -18,10 +18,10 @@
 <body>
     <div class="nav1">
         <ul class="layui-nav layui-bg-cyan">
-            <li class="layui-nav-item"><a th:href="@{course}"><img src="img/logo.png" class="layui-nav-img"/>飞鸡小课堂</a></li>
-            <li class="layui-nav-item layui-this"><a href="">初级课程</a></li>
-            <li class="layui-nav-item"><a href="">中级课程</a></li>
-            <li class="layui-nav-item"><a href="">高级课程</a></li>
+            <li class="layui-nav-item"><a href=""><img src="img/logo.png" class="layui-nav-img"/>飞鸡小课堂</a></li>
+            <li class="layui-nav-item " th:classappend="${videoback[0].courseName == '初级'} ? 'layui-this' : '' "><a href="/video?courseName=初级">初级课程</a></li>
+            <li class="layui-nav-item" th:classappend="${videoback[0].courseName == '中级'} ? 'layui-this' : '' "><a href="/video?courseName=中级">中级课程</a></li>
+            <li class="layui-nav-item" th:classappend="${videoback[0].courseName == '高级'} ? 'layui-this' : '' "><a href="/video?courseName=高级">高级课程</a></li>
         </ul>
     </div>
 
@@ -74,6 +74,15 @@
                     <div class="layui-card-header">课程级别</div>
                     <div class="layui-card-body" th:text="${videoback[0].courseName}">
                             初级
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-header">声明</div>
+                    <div class="layui-card-body" >
+                        官方公用弹幕接口已失效，本弹幕接口由Rat's Blog提供，链接https://www.moerats.com/archives/838/<br>
+                        为增加弹幕厚度，所有开头视频均已接入bilibili中av号为78551626的弹幕为额外弹幕，接口为v3/bilibili?aid=78551626
                     </div>
                 </div>
             </div>

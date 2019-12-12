@@ -54,7 +54,11 @@ public class CourseSerServiceImpl implements CourseSerService {
     /*查找所有的试卷名*/
     @Override
     public List<Paper>selectPaperName() {
-        return courseSerMapper.selectPaperName();
+        List<Paper>list=courseSerMapper.selectPaperName();
+//        for (int i=0;i<list.size();i++){
+//            list.get(i).setPaperName(list.get(i).getPaperName().replace(".docx",""));
+//        }
+        return list;
     }
 
     /*查找所有的填空题*/
